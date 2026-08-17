@@ -185,7 +185,7 @@ const villagers: Array<
     description:
       "Painter in a beret. Sells furniture catalogs and seasonal decorations.",
     tags: ["villager", "human", "artist"],
-    look: { hat: "beret", body: "overalls", accessory: "palette" },
+    look: { hat: "beret", body: "dress", accessory: "palette" },
   },
   {
     id: "ash-wanderer",
