@@ -20,28 +20,56 @@
       "name": "empty",
       "color": null
     },
-    "#": {
-      "name": "outline",
-      "color": "#2b2118"
+    "a": {
+      "name": "glass-light",
+      "color": "#dcecf1"
+    },
+    "b": {
+      "name": "glass-outline",
+      "color": "#3b5560"
+    },
+    "c": {
+      "name": "glass-dark",
+      "color": "#6e909c"
+    },
+    "d": {
+      "name": "glass-base",
+      "color": "#a7c6cf"
+    },
+    "e": {
+      "name": "cream-light",
+      "color": "#fdf6e0"
+    },
+    "f": {
+      "name": "cream-base",
+      "color": "#f0e0b6"
+    },
+    "g": {
+      "name": "cream-dark",
+      "color": "#cdb47f"
+    },
+    "h": {
+      "name": "cream-outline",
+      "color": "#8a7351"
     }
   },
   "frames": {
     "idle-down": {
       "pixels": [
         "................",
-        "................",
-        "........#.......",
-        ".......#.#......",
-        "........#.......",
-        ".....#######....",
-        "....#########...",
-        "...##########...",
-        "...#...#.#..#...",
-        "...#..#...#.#...",
-        "...#...#.#..#...",
-        "...#....#...#...",
-        "...##########...",
-        "................",
+        "........aa......",
+        "........bb......",
+        ".......bccb.....",
+        "........bb......",
+        ".....aaaddaaa...",
+        "....adddddddda..",
+        "..eefffffffffg..",
+        "..ffhhhfhhfhhg..",
+        "..fheegheghggh..",
+        "..fheghgffghgh..",
+        "..fhefghgghegh..",
+        "..fhgggghhgggh..",
+        "..gghhhhgghhhg..",
         "................",
         "................"
       ]

@@ -20,9 +20,21 @@
       "name": "empty",
       "color": null
     },
-    "#": {
-      "name": "outline",
-      "color": "#2b2118"
+    "a": {
+      "name": "darkWood-light",
+      "color": "#8f6236"
+    },
+    "b": {
+      "name": "darkWood-outline",
+      "color": "#241608"
+    },
+    "c": {
+      "name": "darkWood-dark",
+      "color": "#4a2e15"
+    },
+    "d": {
+      "name": "darkWood-base",
+      "color": "#6d4622"
     }
   },
   "frames": {
@@ -32,14 +44,14 @@
         "................",
         "................",
         "................",
-        "..############..",
-        "..#....#.....#..",
-        "..#....#.....#..",
-        "..############..",
-        "..#....#.....#..",
-        "..#....#.....#..",
-        "..#....#.....#..",
-        "..############..",
+        "..abbbbabbbbba..",
+        "..baaacbaaaacb..",
+        "..bccccbcccccb..",
+        "..dbbbbdbbbbbc..",
+        "..baaacbaaaacb..",
+        "..baddcbadddcb..",
+        "..bccccbcccccb..",
+        "..cbbbbcbbbbbc..",
         "................",
         "................",
         "................",

@@ -20,28 +20,52 @@
       "name": "empty",
       "color": null
     },
-    "#": {
-      "name": "outline",
-      "color": "#2b2118"
+    "a": {
+      "name": "stone-light",
+      "color": "#b9b6ae"
+    },
+    "b": {
+      "name": "stone-base",
+      "color": "#8b8880"
+    },
+    "c": {
+      "name": "stone-dark",
+      "color": "#5d5b57"
+    },
+    "d": {
+      "name": "stone-outline",
+      "color": "#33322f"
+    },
+    "e": {
+      "name": "amethyst-outline",
+      "color": "#3a1a5c"
+    },
+    "f": {
+      "name": "amethyst-dark",
+      "color": "#6330a0"
+    },
+    "g": {
+      "name": "amethyst-base",
+      "color": "#9155d6"
     }
   },
   "frames": {
     "idle-down": {
       "pixels": [
         "................",
-        "................",
-        "................",
-        "........#.......",
-        "....#########...",
-        "....##..#..##...",
-        "....#.#.#.#.#...",
-        "....#..###..#...",
-        "...###########..",
-        "....#..###..#...",
-        "....#.#.#.#.#...",
-        "....##..#..##...",
-        "....#########...",
-        "........#.......",
+        ".......aa.......",
+        ".......bc.......",
+        "...aaddbbddaa...",
+        "...bdccddacdc...",
+        "...dcefeefecd...",
+        "...dcfeggefcd...",
+        ".aabdeggggedba..",
+        ".ccbdeggggedbc..",
+        "...dafeggefcd...",
+        "...dcefeefecd...",
+        "...bdccddccdc...",
+        "...ccddbbddcc...",
+        ".......cc.......",
         "................",
         "................"
       ]

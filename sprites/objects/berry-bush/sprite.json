@@ -20,29 +20,57 @@
       "name": "empty",
       "color": null
     },
-    "#": {
-      "name": "outline",
-      "color": "#2b2118"
+    "a": {
+      "name": "darkLeaf-light",
+      "color": "#4f9450"
+    },
+    "b": {
+      "name": "darkLeaf-base",
+      "color": "#337038"
+    },
+    "c": {
+      "name": "darkLeaf-dark",
+      "color": "#1f4a24"
+    },
+    "d": {
+      "name": "darkLeaf-outline",
+      "color": "#0f2413"
+    },
+    "e": {
+      "name": "crimson-dark",
+      "color": "#8a1f1f"
+    },
+    "f": {
+      "name": "crimson-outline",
+      "color": "#4a1010"
+    },
+    "g": {
+      "name": "crimson-base",
+      "color": "#c53030"
+    },
+    "h": {
+      "name": "crimson-light",
+      "color": "#e86a6a"
     }
   },
   "frames": {
     "idle-down": {
       "pixels": [
         "................",
-        "................",
-        "................",
-        "........#.......",
-        ".....###.###....",
-        "....##.....##...",
-        "....#.....#.#...",
-        "....#.#.....#...",
-        "...#.........#..",
-        "....#......##...",
-        "....##..#...#...",
-        "....##.....##...",
-        ".....###.###....",
-        "........#.......",
-        "................",
+        ".......aaa......",
+        ".......bbc......",
+        "....aaaddbaaa...",
+        "...abddacdbbba..",
+        "...bdccbbeffge..",
+        "...bdddabefefe..",
+        ".aadcdabbghefgh.",
+        ".bbdcabbbggeefe.",
+        ".ccbdcbcceeffe..",
+        "...bbdcddfefge..",
+        "...bbdcddeefge..",
+        "...cbbddcffge...",
+        "....cccbdeee....",
+        ".......cc.......",
         "................"
       ]
     }

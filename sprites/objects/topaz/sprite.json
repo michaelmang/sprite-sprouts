@@ -20,28 +20,40 @@
       "name": "empty",
       "color": null
     },
-    "#": {
-      "name": "outline",
-      "color": "#2b2118"
+    "a": {
+      "name": "gold-light",
+      "color": "#ffe884"
+    },
+    "b": {
+      "name": "gold-base",
+      "color": "#efc01f"
+    },
+    "c": {
+      "name": "gold-dark",
+      "color": "#ad7c0c"
+    },
+    "d": {
+      "name": "gold-outline",
+      "color": "#5f4104"
     }
   },
   "frames": {
     "idle-down": {
       "pixels": [
         "................",
-        "................",
-        "................",
-        "................",
-        "......####......",
-        "....########....",
-        "....#......#....",
-        "....#......#....",
-        "....#......#....",
-        "....#......#....",
-        "....#......#....",
-        "....########....",
-        "......####......",
-        "................",
+        ".....aaaaaa.....",
+        ".....bbbbbc.....",
+        "..aaddddddddda..",
+        "..bdaaaaaaaacd..",
+        "..bdabbbbbbbcd..",
+        "..bdabbbbbbbcd..",
+        "..bdabbbbbbbcd..",
+        "..bdabbbbbbbcd..",
+        "..bdabbbbbbbcd..",
+        "..bdabbbbbbbcd..",
+        "..bdcccccccccd..",
+        "..ccdddddddddc..",
+        ".....cccccc.....",
         "................",
         "................"
       ]

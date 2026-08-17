@@ -1,21 +1,35 @@
-import { listSprites } from "../src/lib/catalog";
+import { listSprites, type CatalogEntry } from "../src/lib/catalog";
+import type { SpriteDocument } from "../src/lib/sprite-schema";
 
 type Shape = {
   id: string;
-  pixels: string[];
+  /** Palette-resolved colours, so comparisons survive per-sprite palette keys. */
+  colors: Array<Array<string | null>>;
   ink: number;
   bounds: { width: number; height: number };
-  localDensity: number;
+  distinctColors: number;
   signature: string;
 };
 
-function shapeFor(id: string, pixels: string[]): Shape {
-  const points: Array<[number, number]> = [];
+function colorGrid(
+  sprite: SpriteDocument,
+  pixels: string[],
+): Array<Array<string | null>> {
+  return pixels.map((row) =>
+    [...row].map((cell) => sprite.palette[cell]?.color ?? null),
+  );
+}
 
-  pixels.forEach((row, y) => {
-    [...row].forEach((cell, x) => {
-      if (cell !== ".") {
+function shapeFor(id: string, sprite: SpriteDocument, pixels: string[]): Shape {
+  const colors = colorGrid(sprite, pixels);
+  const points: Array<[number, number]> = [];
+  const used = new Set<string>();
+
+  colors.forEach((row, y) => {
+    row.forEach((color, x) => {
+      if (color) {
         points.push([x, y]);
+        used.add(color);
       }
     });
   });
@@ -23,10 +37,10 @@ function shapeFor(id: string, pixels: string[]): Shape {
   if (points.length === 0) {
     return {
       id,
-      pixels,
+      colors,
       ink: 0,
       bounds: { width: 0, height: 0 },
-      localDensity: 0,
+      distinctColors: 0,
       signature: "",
     };
   }
@@ -34,65 +48,66 @@ function shapeFor(id: string, pixels: string[]): Shape {
   const xs = points.map(([x]) => x);
   const ys = points.map(([, y]) => y);
   const minX = Math.min(...xs);
-  const maxX = Math.max(...xs);
   const minY = Math.min(...ys);
-  const maxY = Math.max(...ys);
-  const width = maxX - minX + 1;
-  const height = maxY - minY + 1;
-  const occupied = new Set(points.map(([x, y]) => `${x - minX},${y - minY}`));
+  const width = Math.max(...xs) - minX + 1;
+  const height = Math.max(...ys) - minY + 1;
+
   const signature = Array.from({ length: height }, (_, y) =>
-    Array.from({ length: width }, (_, x) =>
-      occupied.has(`${x},${y}`) ? "#" : ".",
-    ).join(""),
+    Array.from(
+      { length: width },
+      (_, x) => colors[minY + y]?.[minX + x] ?? "-",
+    ).join(","),
   ).join("/");
 
   return {
     id,
-    pixels,
+    colors,
     ink: points.length,
     bounds: { width, height },
-    localDensity: points.length / (width * height),
+    distinctColors: used.size,
     signature,
   };
 }
 
+/** Agreement over painted cells: same shape in different colours is not a clash. */
 function similarity(a: Shape, b: Shape): number {
-  if (
-    a.pixels.length !== b.pixels.length ||
-    a.pixels[0]?.length !== b.pixels[0]?.length
-  ) {
+  if (a.colors.length !== b.colors.length) {
     return 0;
   }
 
-  let intersection = 0;
+  let matching = 0;
   let union = 0;
-  a.pixels.forEach((row, y) => {
-    [...row].forEach((cell, x) => {
-      const aInk = cell !== ".";
-      const bInk = b.pixels[y]?.[x] !== ".";
-      if (aInk || bInk) {
+  a.colors.forEach((row, y) => {
+    row.forEach((color, x) => {
+      const other = b.colors[y]?.[x] ?? null;
+      if (color || other) {
         union += 1;
       }
-      if (aInk && bInk) {
-        intersection += 1;
+      if (color && other && color === other) {
+        matching += 1;
       }
     });
   });
-  return union === 0 ? 1 : intersection / union;
+
+  return union === 0 ? 1 : matching / union;
+}
+
+function previewPixels(entry: CatalogEntry): string[] {
+  const frameId =
+    entry.sprite.animations[0]?.directions.down?.[0] ??
+    Object.keys(entry.sprite.frames)[0];
+  const pixels = frameId ? entry.sprite.frames[frameId]?.pixels : undefined;
+  if (!pixels) {
+    throw new Error(`No preview frame for ${entry.sprite.id}`);
+  }
+  return pixels;
 }
 
 async function main() {
   const entries = await listSprites();
-  const shapes = entries.map((entry) => {
-    const frameId =
-      entry.sprite.animations[0]?.directions.down?.[0] ??
-      Object.keys(entry.sprite.frames)[0];
-    const pixels = frameId ? entry.sprite.frames[frameId]?.pixels : undefined;
-    if (!pixels) {
-      throw new Error(`No preview frame for ${entry.sprite.id}`);
-    }
-    return shapeFor(entry.sprite.id, pixels);
-  });
+  const shapes = entries.map((entry) =>
+    shapeFor(entry.sprite.id, entry.sprite, previewPixels(entry)),
+  );
 
   const duplicateGroups = new Map<string, Shape[]>();
   for (const shape of shapes) {
@@ -104,6 +119,7 @@ async function main() {
   const exact = [...duplicateGroups.values()].filter(
     (group) => group.length > 1,
   );
+
   const near: Array<{ a: string; b: string; score: number }> = [];
   for (let i = 0; i < shapes.length; i += 1) {
     for (let j = i + 1; j < shapes.length; j += 1) {
@@ -119,14 +135,30 @@ async function main() {
     }
   }
 
-  const weak = shapes.filter(
-    (shape) =>
-      shape.ink < 18 ||
-      shape.bounds.width < 3 ||
-      shape.bounds.height < 3 ||
-      shape.localDensity > 0.72 ||
-      shape.ink > shape.pixels.length * (shape.pixels[0]?.length ?? 0) * 0.58,
-  );
+  const weak: string[] = [];
+  for (const [index, shape] of shapes.entries()) {
+    const entry = entries[index];
+    if (!entry) {
+      continue;
+    }
+    const isObject = entry.sprite.kind === "object";
+    const longestSide = Math.max(shape.bounds.width, shape.bounds.height);
+
+    if (shape.ink < 18) {
+      weak.push(`${shape.id}: only ${shape.ink} painted pixels`);
+    }
+    if (shape.bounds.width < 3 || shape.bounds.height < 3) {
+      weak.push(`${shape.id}: degenerate bounds`);
+    }
+    if (isObject && longestSide < 11) {
+      weak.push(`${shape.id}: fills only ${longestSide}px of the 16px tile`);
+    }
+    if (shape.distinctColors < 3) {
+      weak.push(
+        `${shape.id}: ${shape.distinctColors} colours, needs an outline, body, and shading step`,
+      );
+    }
+  }
 
   const frameRoles = [
     "idle-down",
@@ -135,10 +167,7 @@ async function main() {
     "walk-down-left",
     "walk-down-right",
   ] as const;
-  const directionalDuplicates: Array<{
-    frameId: string;
-    ids: string[];
-  }> = [];
+  const directionalDuplicates: Array<{ frameId: string; ids: string[] }> = [];
   const frameFaults: string[] = [];
 
   for (const frameId of frameRoles) {
@@ -150,7 +179,11 @@ async function main() {
       if (!pixels) {
         continue;
       }
-      const signature = shapeFor(entry.sprite.id, pixels).signature;
+      const signature = shapeFor(
+        entry.sprite.id,
+        entry.sprite,
+        pixels,
+      ).signature;
       const ids = bySignature.get(signature) ?? [];
       ids.push(entry.sprite.id);
       bySignature.set(signature, ids);
@@ -190,21 +223,17 @@ async function main() {
   }
 
   console.log(`Audited ${shapes.length} sprite previews.`);
-  console.log(`Exact duplicate silhouettes: ${exact.length}`);
+  console.log(`Exact duplicate sprites: ${exact.length}`);
   for (const group of exact) {
     console.log(`  - ${group.map((shape) => shape.id).join(", ")}`);
   }
-  console.log(
-    `Close silhouette neighbors for human review (IoU ≥ 0.78): ${near.length}`,
-  );
+  console.log(`Close neighbours (painted overlap ≥ 0.78): ${near.length}`);
   for (const pair of near.sort((a, b) => b.score - a.score)) {
     console.log(`  - ${pair.a} / ${pair.b}: ${(pair.score * 100).toFixed(1)}%`);
   }
-  console.log(`Weak density or bounds: ${weak.length}`);
-  for (const shape of weak) {
-    console.log(
-      `  - ${shape.id}: ${shape.ink}px, ${shape.bounds.width}×${shape.bounds.height} bounds, ${(shape.localDensity * 100).toFixed(0)}% local density`,
-    );
+  console.log(`Weak fill, colour, or bounds: ${weak.length}`);
+  for (const message of weak) {
+    console.log(`  - ${message}`);
   }
   console.log(
     `Duplicate character silhouettes in corresponding directions: ${directionalDuplicates.length}`,
