@@ -62,12 +62,20 @@ yarn build
 
 ## Local setup
 
-Yarn 4 via Corepack:
+This repo pins **Yarn 4.10.3** in `package.json` (`packageManager`). A globally installed Yarn 1.22.x will fail with:
+
+> This project's package.json defines "packageManager": "yarn@4.10.3". However the current global version of Yarn is 1.22.22.
+
+Enable [Corepack](https://yarnpkg.com/corepack) so `yarn` is the pinned version:
 
 ```bash
 corepack enable
+corepack prepare yarn@4.10.3 --activate
+yarn --version   # 4.10.3
 yarn install
 yarn dev
 ```
+
+If `yarn --version` is still 1.x, the old binary is ahead of Corepack on `PATH`. Use `corepack yarn install`, or remove the global Yarn 1 install (`npm uninstall -g yarn`).
 
 CI runs format, lint, typecheck, sprite validation, SVG render (must stay committed), and the Next.js build.
