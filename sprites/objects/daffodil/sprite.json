@@ -1,0 +1,59 @@
+{
+  "$schema": "../../../schemas/sprite.schema.json",
+  "schemaVersion": 1,
+  "id": "daffodil",
+  "name": "Daffodil",
+  "kind": "object",
+  "status": "outline",
+  "description": "A yellow spring wildflower.",
+  "tags": ["forage"],
+  "canvas": {
+    "width": 16,
+    "height": 16
+  },
+  "pivot": {
+    "x": 8,
+    "y": 16
+  },
+  "palette": {
+    ".": {
+      "name": "empty",
+      "color": null
+    },
+    "#": {
+      "name": "outline",
+      "color": "#2b2118"
+    }
+  },
+  "frames": {
+    "idle-down": {
+      "pixels": [
+        "................",
+        "................",
+        "................",
+        "........#.......",
+        "......##.##.....",
+        "......#.#.#.....",
+        ".....#.###.#....",
+        "......#.#.#.....",
+        "......##.##.....",
+        "........#.......",
+        "........#.......",
+        "......#.#.......",
+        "........#.......",
+        "........#.......",
+        "........#.......",
+        "................"
+      ]
+    }
+  },
+  "animations": [
+    {
+      "id": "idle",
+      "frameMs": 400,
+      "directions": {
+        "down": ["idle-down"]
+      }
+    }
+  ]
+}

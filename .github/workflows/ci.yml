@@ -29,6 +29,7 @@ jobs:
       - run: yarn lint
       - run: yarn typecheck
       - run: yarn sprites:validate
+      - run: yarn sprites:audit
       - run: yarn sprites:render
       - name: Check rendered SVGs are committed
         run: git diff --exit-code -- sprites

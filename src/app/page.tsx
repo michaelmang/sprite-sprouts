@@ -1,12 +1,16 @@
 import { SpriteCard } from "@/components/SpriteCard";
-import { listSprites } from "@/lib/catalog";
+import { groupByCategory, listSprites, type CatalogEntry } from "@/lib/catalog";
 
 export default async function Home() {
   const entries = await listSprites();
-  const characters = entries.filter(
+  const characters = groupByCategory(entries, "character");
+  const objects = groupByCategory(entries, "object");
+  const characterCount = entries.filter(
     (entry) => entry.sprite.kind === "character",
-  );
-  const objects = entries.filter((entry) => entry.sprite.kind === "object");
+  ).length;
+  const objectCount = entries.filter(
+    (entry) => entry.sprite.kind === "object",
+  ).length;
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-12 px-6 py-12">
@@ -18,38 +22,53 @@ export default async function Home() {
           Outlines in, painted sprites back.
         </h1>
         <p className="text-soil mt-4 text-lg leading-8">
-          AI drops character and object outlines here. Pull the files into your
-          desktop software, paint them, then upload the finalized sprites to the
-          same folders.
+          {characterCount} character and {objectCount} object outlines covering
+          a full valley: townsfolk, farm animals, tools, crops, forage, mines,
+          fish, artisan goods, machines, and furniture. Pull a folder into your
+          desktop software, paint it, then upload the finished sprite back.
         </p>
       </section>
 
-      <section className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold">Characters</h2>
-        {characters.length === 0 ? (
-          <EmptyKind kind="character" />
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {characters.map((entry) => (
-              <SpriteCard key={entry.sprite.id} sprite={entry.sprite} />
-            ))}
-          </div>
-        )}
-      </section>
-
-      <section className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold">Objects</h2>
-        {objects.length === 0 ? (
-          <EmptyKind kind="object" />
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {objects.map((entry) => (
-              <SpriteCard key={entry.sprite.id} sprite={entry.sprite} />
-            ))}
-          </div>
-        )}
-      </section>
+      <KindSections title="Characters" kind="character" groups={characters} />
+      <KindSections title="Objects" kind="object" groups={objects} />
     </main>
+  );
+}
+
+function KindSections({
+  title,
+  kind,
+  groups,
+}: {
+  title: string;
+  kind: "character" | "object";
+  groups: Array<{ category: string; entries: CatalogEntry[] }>;
+}) {
+  if (groups.length === 0) {
+    return (
+      <section className="flex flex-col gap-4">
+        <h2 className="text-xl font-semibold">{title}</h2>
+        <EmptyKind kind={kind} />
+      </section>
+    );
+  }
+
+  return (
+    <>
+      {groups.map((group) => (
+        <section key={group.category} className="flex flex-col gap-4">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="text-xl font-semibold">{group.category}</h2>
+            <p className="text-soil text-sm">{group.entries.length}</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {group.entries.map((entry) => (
+              <SpriteCard key={entry.sprite.id} sprite={entry.sprite} />
+            ))}
+          </div>
+        </section>
+      ))}
+    </>
   );
 }
 

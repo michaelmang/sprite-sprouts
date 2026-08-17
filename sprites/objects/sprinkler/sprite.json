@@ -1,0 +1,59 @@
+{
+  "$schema": "../../../schemas/sprite.schema.json",
+  "schemaVersion": 1,
+  "id": "sprinkler",
+  "name": "Sprinkler",
+  "kind": "object",
+  "status": "outline",
+  "description": "Waters adjacent crop tiles.",
+  "tags": ["machine", "crafting"],
+  "canvas": {
+    "width": 16,
+    "height": 16
+  },
+  "pivot": {
+    "x": 8,
+    "y": 16
+  },
+  "palette": {
+    ".": {
+      "name": "empty",
+      "color": null
+    },
+    "#": {
+      "name": "outline",
+      "color": "#2b2118"
+    }
+  },
+  "frames": {
+    "idle-down": {
+      "pixels": [
+        "................",
+        "................",
+        "................",
+        "........#.......",
+        "........#.......",
+        "........#.......",
+        "......####......",
+        "......#.##......",
+        "...###########..",
+        "......#.##......",
+        "......#.##......",
+        "......####......",
+        "........#.......",
+        "........#.......",
+        "................",
+        "................"
+      ]
+    }
+  },
+  "animations": [
+    {
+      "id": "idle",
+      "frameMs": 400,
+      "directions": {
+        "down": ["idle-down"]
+      }
+    }
+  ]
+}

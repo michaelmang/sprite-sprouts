@@ -1,0 +1,59 @@
+{
+  "$schema": "../../../schemas/sprite.schema.json",
+  "schemaVersion": 1,
+  "id": "copper-pan",
+  "name": "Copper Pan",
+  "kind": "object",
+  "status": "outline",
+  "description": "Pans riverbeds for ore flakes.",
+  "tags": ["tool"],
+  "canvas": {
+    "width": 16,
+    "height": 16
+  },
+  "pivot": {
+    "x": 8,
+    "y": 16
+  },
+  "palette": {
+    ".": {
+      "name": "empty",
+      "color": null
+    },
+    "#": {
+      "name": "outline",
+      "color": "#2b2118"
+    }
+  },
+  "frames": {
+    "idle-down": {
+      "pixels": [
+        "................",
+        "................",
+        "................",
+        "................",
+        "..............##",
+        "..............#.",
+        "..............#.",
+        "..############..",
+        "..#..........#..",
+        "...#......#.#...",
+        "...#...#....#...",
+        "....#......#....",
+        "....########....",
+        "................",
+        "................",
+        "................"
+      ]
+    }
+  },
+  "animations": [
+    {
+      "id": "idle",
+      "frameMs": 400,
+      "directions": {
+        "down": ["idle-down"]
+      }
+    }
+  ]
+}
