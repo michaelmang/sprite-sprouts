@@ -13,6 +13,7 @@
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "sprites:validate": "tsx scripts/validate-sprites.ts",
+    "sprites:audit": "tsx scripts/audit-sprites.ts",
     "sprites:new": "tsx scripts/new-sprite.ts",
     "sprites:render": "tsx scripts/render-sprites.ts",
     "sprites:catalog": "tsx scripts/generate-catalog.ts"

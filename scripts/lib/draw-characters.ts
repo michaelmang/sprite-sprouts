@@ -18,6 +18,22 @@ export type VillagerLook = {
   beard?: "none" | "short" | "long";
   body: "overalls" | "dress" | "robe" | "apron" | "suit" | "coat" | "shorts";
   scale?: "adult" | "child";
+  accessory?:
+    | "ledger"
+    | "basket"
+    | "hammer"
+    | "mug"
+    | "fish"
+    | "staff"
+    | "saw"
+    | "stethoscope"
+    | "book"
+    | "pitchfork"
+    | "net"
+    | "cane"
+    | "pickaxe"
+    | "palette"
+    | "lantern";
 };
 
 export type CharacterFrames = {
@@ -48,6 +64,122 @@ function legs(canvas: PixelCanvas, y: number, dress: boolean): void {
   canvas.rect(8, y, 3, 7);
   canvas.hline(4, 7, y + 7);
   canvas.hline(8, 11, y + 7);
+}
+
+function accessoryDown(
+  canvas: PixelCanvas,
+  kind: VillagerLook["accessory"],
+  torsoY: number,
+): void {
+  switch (kind) {
+    case "ledger":
+      canvas.rect(1, torsoY + 1, 4, 6);
+      canvas.vline(3, torsoY + 2, torsoY + 5);
+      break;
+    case "basket":
+      canvas.rect(11, torsoY + 4, 5, 5);
+      canvas.circle(13, torsoY + 4, 2);
+      break;
+    case "hammer":
+      canvas.vline(14, torsoY - 1, torsoY + 8);
+      canvas.fillRect(11, torsoY - 2, 5, 3);
+      break;
+    case "mug":
+      canvas.rect(12, torsoY + 2, 3, 4);
+      canvas.plot(15, torsoY + 3);
+      break;
+    case "fish":
+      canvas.line(1, torsoY + 6, 4, torsoY + 2);
+      canvas.points([
+        [1, torsoY + 6],
+        [2, torsoY + 7],
+        [3, torsoY + 6],
+      ]);
+      break;
+    case "staff":
+      canvas.vline(14, torsoY - 6, 30);
+      canvas.diamond(14, torsoY - 7, 2);
+      break;
+    case "saw":
+      canvas.line(1, torsoY + 7, 5, torsoY + 2);
+      canvas.points([
+        [1, torsoY + 6],
+        [2, torsoY + 5],
+        [3, torsoY + 4],
+      ]);
+      break;
+    case "stethoscope":
+      canvas.circle(8, torsoY + 3, 2);
+      canvas.line(6, torsoY + 1, 5, torsoY - 1);
+      canvas.line(10, torsoY + 1, 11, torsoY - 1);
+      canvas.plot(8, torsoY + 6);
+      break;
+    case "book":
+      canvas.rect(1, torsoY + 2, 5, 5);
+      canvas.vline(3, torsoY + 2, torsoY + 6);
+      break;
+    case "pitchfork":
+      canvas.vline(14, torsoY - 5, 30);
+      canvas.hline(12, 15, torsoY - 5);
+      canvas.vline(12, torsoY - 5, torsoY - 2);
+      canvas.vline(15, torsoY - 5, torsoY - 2);
+      break;
+    case "net":
+      canvas.circle(13, torsoY - 1, 3);
+      canvas.line(11, torsoY + 1, 4, 30);
+      break;
+    case "cane":
+      canvas.vline(13, torsoY + 3, 30);
+      canvas.hline(11, 13, torsoY + 3);
+      break;
+    case "pickaxe":
+      canvas.line(2, 29, 13, torsoY - 2);
+      canvas.line(9, torsoY - 3, 15, torsoY);
+      break;
+    case "palette":
+      canvas.circle(2, torsoY + 4, 3);
+      canvas.plot(1, torsoY + 3);
+      canvas.plot(3, torsoY + 4);
+      canvas.line(12, torsoY + 7, 15, torsoY - 2);
+      break;
+    case "lantern":
+      canvas.rect(11, torsoY + 3, 5, 6);
+      canvas.hline(12, 14, torsoY + 2);
+      canvas.plot(13, torsoY + 5);
+      break;
+    default:
+      break;
+  }
+}
+
+function accessorySide(
+  canvas: PixelCanvas,
+  kind: VillagerLook["accessory"],
+  torsoY: number,
+): void {
+  if (kind === "staff" || kind === "pitchfork" || kind === "lantern") {
+    canvas.vline(3, torsoY - 5, 30);
+    if (kind === "staff") {
+      canvas.diamond(3, torsoY - 6, 2);
+    } else if (kind === "pitchfork") {
+      canvas.hline(1, 5, torsoY - 5);
+      canvas.vline(1, torsoY - 5, torsoY - 2);
+      canvas.vline(5, torsoY - 5, torsoY - 2);
+    } else {
+      canvas.rect(1, torsoY + 3, 5, 6);
+    }
+    return;
+  }
+  if (kind === "hammer" || kind === "pickaxe" || kind === "saw") {
+    canvas.line(3, 29, 6, torsoY);
+    if (kind === "hammer") {
+      canvas.fillRect(3, torsoY - 2, 6, 3);
+    } else if (kind === "pickaxe") {
+      canvas.line(2, torsoY, 9, torsoY - 3);
+    } else {
+      canvas.line(2, torsoY + 2, 7, torsoY - 2);
+    }
+  }
 }
 
 function torso(
@@ -172,6 +304,7 @@ export function drawVillagerDown(look: VillagerLook): string[] {
   }
   const torsoY = faceY + (look.beard === "long" ? 9 : 7);
   torso(canvas, torsoY, look.body);
+  accessoryDown(canvas, look.accessory, torsoY);
   legs(canvas, torsoY + 8, look.body === "dress" || look.body === "robe");
   return canvas.toPixels();
 }
@@ -214,6 +347,8 @@ export function drawVillagerRight(look: VillagerLook): string[] {
   if (look.body === "overalls" || look.body === "apron") {
     canvas.rect(8, torsoY + 1, 4, 5);
   }
+
+  accessorySide(canvas, look.accessory, torsoY);
 
   if (look.body === "dress" || look.body === "robe") {
     canvas.rect(6, torsoY + 8, 7, 8);

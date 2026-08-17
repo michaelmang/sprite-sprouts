@@ -202,9 +202,14 @@ export const objectDrafts: ObjectDraft[] = [
     c.plot(9, 3);
   }),
   tool("copper-pan", "Copper Pan", "Pans riverbeds for ore flakes.", (c) => {
-    c.circle(8, 8, 5);
-    c.hline(4, 12, 8);
-    c.plot(13, 6);
+    c.line(2, 7, 4, 11);
+    c.hline(4, 11, 12);
+    c.line(11, 12, 13, 7);
+    c.hline(2, 13, 7);
+    c.line(13, 7, 15, 4);
+    c.line(14, 4, 15, 4);
+    c.plot(7, 10);
+    c.plot(10, 9);
   }),
 
   crop("parsnip", "Parsnip", "A long pale spring root.", (c) => {
@@ -216,9 +221,24 @@ export const objectDrafts: ObjectDraft[] = [
     c.plot(10, 4);
   }),
   crop("potato", "Potato", "A lumpy underground tuber.", (c) => {
-    c.circle(8, 8, 4, true);
-    c.plot(5, 6);
-    c.plot(11, 10);
+    c.points([
+      [6, 4],
+      [9, 4],
+      [11, 5],
+      [12, 7],
+      [11, 11],
+      [9, 13],
+      [6, 12],
+      [4, 10],
+      [4, 7],
+      [5, 5],
+    ]);
+    c.line(6, 4, 9, 4);
+    c.line(12, 7, 11, 11);
+    c.line(9, 13, 6, 12);
+    c.line(4, 10, 4, 7);
+    c.plot(6, 7);
+    c.plot(9, 10);
   }),
   crop("cauliflower", "Cauliflower", "A dense white curd on a stem.", (c) => {
     c.circle(8, 6, 4);
@@ -243,18 +263,38 @@ export const objectDrafts: ObjectDraft[] = [
     c.plot(5, 11);
   }),
   crop("strawberry", "Strawberry", "A heart-shaped berry with seeds.", (c) => {
-    c.plot(8, 3);
-    c.plot(7, 4);
-    c.plot(9, 4);
-    c.circle(8, 9, 4, true);
-    c.plot(6, 8);
-    c.plot(10, 8);
-    c.plot(8, 10);
+    c.points([
+      [5, 6],
+      [7, 5],
+      [8, 6],
+      [9, 5],
+      [11, 6],
+      [12, 8],
+      [8, 14],
+      [4, 8],
+    ]);
+    c.line(5, 6, 7, 5);
+    c.line(9, 5, 11, 6);
+    c.line(11, 6, 12, 8);
+    c.line(12, 8, 8, 14);
+    c.line(8, 14, 4, 8);
+    c.line(4, 8, 5, 6);
+    c.points([
+      [6, 8],
+      [10, 8],
+      [8, 10],
+      [7, 12],
+    ]);
+    c.line(8, 6, 8, 3);
+    c.plot(6, 4);
+    c.plot(10, 4);
   }),
   crop("melon", "Melon", "A heavy summer melon.", (c) => {
-    c.circle(8, 8, 5, true);
-    c.plot(8, 3);
-    c.vline(8, 4, 5);
+    c.circle(8, 9, 5);
+    c.vline(8, 4, 14);
+    c.line(6, 5, 5, 12);
+    c.line(10, 5, 11, 12);
+    c.line(8, 4, 10, 2);
   }),
   crop("blueberry", "Blueberry", "A cluster of small berries.", (c) => {
     c.circle(6, 7, 2, true);
@@ -263,12 +303,18 @@ export const objectDrafts: ObjectDraft[] = [
     c.plot(8, 4);
   }),
   crop("tomato", "Tomato", "A round fruit with a calyx.", (c) => {
-    c.circle(8, 9, 4, true);
-    c.plot(8, 4);
-    c.plot(6, 5);
-    c.plot(10, 5);
-    c.plot(7, 6);
-    c.plot(9, 6);
+    c.circle(8, 9, 4);
+    c.plot(8, 5);
+    c.line(8, 5, 8, 2);
+    c.points([
+      [5, 5],
+      [6, 6],
+      [10, 6],
+      [11, 5],
+      [8, 7],
+    ]);
+    c.plot(6, 9);
+    c.plot(10, 10);
   }),
   crop("corn", "Corn", "A tall ear of corn.", (c) => {
     c.rect(6, 3, 4, 10);
@@ -368,8 +414,11 @@ export const objectDrafts: ObjectDraft[] = [
     }),
   ),
   seed("ancient-seed", "Ancient Seed", "A mysterious fossilized seed.", (c) => {
-    c.diamond(8, 8, 5);
-    c.diamond(8, 8, 2, true);
+    c.circle(8, 8, 5);
+    c.line(5, 10, 10, 5);
+    c.line(6, 11, 11, 6);
+    c.plot(5, 6);
+    c.plot(10, 11);
   }),
   seed(
     "mixed-seeds",
@@ -439,10 +488,13 @@ export const objectDrafts: ObjectDraft[] = [
     "Spice Berry",
     "A fragrant summer forage berry.",
     (c) => {
-      c.circle(8, 8, 3, true);
-      c.plot(8, 4);
-      c.plot(6, 5);
-      c.plot(10, 5);
+      c.circle(8, 9, 3);
+      c.circle(8, 9, 1);
+      c.line(8, 6, 8, 3);
+      c.line(8, 4, 5, 2);
+      c.line(8, 4, 11, 2);
+      c.plot(5, 8);
+      c.plot(11, 10);
     },
   ),
   forage("cave-carrot", "Cave Carrot", "A pale root found in mines.", (c) => {
@@ -452,9 +504,11 @@ export const objectDrafts: ObjectDraft[] = [
     c.plot(9, 2);
   }),
   forage("wild-plum", "Wild Plum", "A small tart forest plum.", (c) => {
-    c.circle(8, 8, 3, true);
-    c.plot(10, 6);
-    c.plot(8, 4);
+    c.circle(8, 9, 4);
+    c.line(8, 5, 10, 2);
+    c.line(10, 2, 13, 3);
+    c.line(10, 3, 12, 5);
+    c.plot(6, 8);
   }),
   forage("blackberry", "Blackberry", "A late-fall bramble berry.", (c) => {
     c.circle(7, 7, 2, true);
@@ -473,16 +527,21 @@ export const objectDrafts: ObjectDraft[] = [
     "Crystal Fruit",
     "A winter fruit with a glassy skin.",
     (c) => {
-      c.diamond(8, 8, 5, true);
-      c.erase(8, 8);
-      c.plot(8, 3);
+      c.diamond(8, 9, 5);
+      c.diamond(8, 9, 2);
+      c.line(8, 4, 10, 2);
+      c.plot(11, 2);
     },
   ),
   forage("coconut", "Coconut", "A tough tropical nut.", (c) => {
-    c.circle(8, 8, 5, true);
-    c.plot(6, 6);
-    c.plot(8, 6);
-    c.plot(7, 7);
+    c.circle(8, 9, 5);
+    c.line(5, 5, 11, 12);
+    c.line(4, 7, 9, 13);
+    c.points([
+      [6, 7],
+      [8, 6],
+      [10, 7],
+    ]);
   }),
   forage("cactus-fruit", "Cactus Fruit", "A desert forage fruit.", (c) => {
     c.circle(8, 9, 3, true);
@@ -492,9 +551,12 @@ export const objectDrafts: ObjectDraft[] = [
   }),
 
   resource("wood", "Wood", "Basic lumber from trees.", (c) => {
-    c.rect(3, 5, 10, 6);
-    c.hline(3, 12, 7);
-    c.hline(3, 12, 9);
+    c.rect(3, 4, 10, 4);
+    c.circle(4, 6, 2);
+    c.rect(2, 9, 10, 4);
+    c.circle(11, 11, 2);
+    c.plot(4, 6);
+    c.plot(11, 11);
   }),
   resource("hardwood", "Hardwood", "Dense lumber from large stumps.", (c) => {
     c.rect(2, 4, 12, 8);
@@ -515,14 +577,20 @@ export const objectDrafts: ObjectDraft[] = [
     c.line(11, 13, 12, 4);
   }),
   resource("sap", "Sap", "Sticky resin from tapped trees.", (c) => {
-    c.plot(8, 3);
-    c.plot(8, 4);
-    c.circle(8, 9, 4, true);
+    c.plot(8, 2);
+    c.line(8, 2, 4, 9);
+    c.line(8, 2, 12, 9);
+    c.circle(8, 10, 4);
+    c.plot(6, 11);
+    c.plot(9, 8);
   }),
   resource("clay", "Clay", "Soft earth for pottery and flooring.", (c) => {
-    c.fillRect(4, 8, 8, 5);
-    c.hline(5, 11, 7);
-    c.hline(6, 10, 6);
+    c.circle(6, 9, 3);
+    c.circle(10, 9, 3);
+    c.circle(8, 7, 3);
+    c.hline(5, 11, 12);
+    c.plot(6, 8);
+    c.plot(10, 10);
   }),
   resource("coal", "Coal", "Fuel for furnaces.", (c) => {
     c.diamond(8, 8, 4, true);
@@ -540,8 +608,23 @@ export const objectDrafts: ObjectDraft[] = [
     c.plot(10, 9);
   }),
   resource("gold-ore", "Gold Ore", "Raw gold from late-mine nodes.", (c) => {
-    c.diamond(8, 8, 5);
-    c.diamond(8, 8, 2, true);
+    c.points([
+      [7, 3],
+      [11, 4],
+      [13, 8],
+      [11, 12],
+      [7, 13],
+      [3, 10],
+      [4, 6],
+    ]);
+    c.line(7, 3, 11, 4);
+    c.line(11, 4, 13, 8);
+    c.line(13, 8, 11, 12);
+    c.line(11, 12, 7, 13);
+    c.line(7, 13, 3, 10);
+    c.line(3, 10, 4, 6);
+    c.line(4, 6, 7, 3);
+    c.diamond(8, 8, 2);
   }),
   resource("star-ore", "Star Ore", "A rare late-game ore.", (c) => {
     c.plot(8, 3);
@@ -558,15 +641,47 @@ export const objectDrafts: ObjectDraft[] = [
     c.hline(5, 11, 12);
   }),
   resource("geode", "Geode", "A rock that may hold minerals.", (c) => {
-    c.circle(8, 8, 5, true);
-    c.circle(8, 8, 2);
+    c.points([
+      [7, 3],
+      [11, 4],
+      [13, 7],
+      [12, 11],
+      [9, 13],
+      [5, 12],
+      [3, 9],
+      [4, 5],
+    ]);
+    c.line(7, 3, 11, 4);
+    c.line(11, 4, 13, 7);
+    c.line(13, 7, 12, 11);
+    c.line(12, 11, 9, 13);
+    c.line(9, 13, 5, 12);
+    c.line(5, 12, 3, 9);
+    c.line(3, 9, 4, 5);
+    c.line(4, 5, 7, 3);
+    c.diamond(8, 8, 2);
   }),
   resource(
     "magma-geode",
     "Magma Geode",
     "A geode formed in lava floors.",
     (c) => {
-      c.circle(8, 8, 5);
+      c.points([
+        [8, 2],
+        [12, 4],
+        [14, 8],
+        [11, 13],
+        [5, 13],
+        [2, 8],
+        [4, 4],
+      ]);
+      c.line(8, 2, 12, 4);
+      c.line(12, 4, 14, 8);
+      c.line(14, 8, 11, 13);
+      c.line(11, 13, 5, 13);
+      c.line(5, 13, 2, 8);
+      c.line(2, 8, 4, 4);
+      c.line(4, 4, 8, 2);
       c.diamond(8, 8, 2, true);
     },
   ),
@@ -627,8 +742,14 @@ export const objectDrafts: ObjectDraft[] = [
     c.hline(6, 10, 8);
   }),
   gem("ruby", "Ruby", "A deep red cut gem.", (c) => {
-    c.diamond(8, 8, 5, true);
-    c.erase(8, 8);
+    c.hline(6, 10, 3);
+    c.line(6, 3, 3, 7);
+    c.line(10, 3, 13, 7);
+    c.line(3, 7, 6, 13);
+    c.line(13, 7, 10, 13);
+    c.hline(6, 10, 13);
+    c.line(3, 7, 13, 7);
+    c.vline(8, 4, 12);
   }),
   gem("amethyst", "Amethyst", "A purple cluster gem.", (c) => {
     c.plot(8, 3);
@@ -645,8 +766,9 @@ export const objectDrafts: ObjectDraft[] = [
     c.hline(6, 9, 12);
   }),
   gem("jade", "Jade", "A smooth green stone.", (c) => {
-    c.circle(8, 8, 5, true);
-    c.hline(5, 11, 8);
+    c.circle(8, 8, 5);
+    c.circle(8, 8, 2);
+    c.line(5, 5, 11, 11);
   }),
   gem("diamond", "Diamond", "A rare brilliant gem.", (c) => {
     c.plot(8, 2);
@@ -670,28 +792,61 @@ export const objectDrafts: ObjectDraft[] = [
     },
   ),
 
-  fish("sunfish", "Sunfish", "A small sunny-day river fish.", (c) =>
-    fishBody(c, 8, 8, false),
-  ),
+  fish("sunfish", "Sunfish", "A small sunny-day river fish.", (c) => {
+    c.circle(8, 8, 4);
+    c.line(5, 5, 8, 2);
+    c.line(8, 2, 11, 5);
+    c.line(5, 11, 8, 14);
+    c.line(8, 14, 11, 11);
+    c.plot(11, 7);
+    c.line(4, 8, 1, 5);
+    c.line(4, 8, 1, 11);
+  }),
   fish("bream", "Bream", "A common nighttime river fish.", (c) => {
-    fishBody(c, 7, 8, false);
-    c.plot(7, 6);
+    c.line(3, 8, 6, 5);
+    c.hline(6, 11, 5);
+    c.line(11, 5, 14, 8);
+    c.line(14, 8, 11, 10);
+    c.hline(6, 11, 10);
+    c.line(6, 10, 3, 8);
+    c.plot(11, 7);
+    c.line(3, 8, 1, 5);
+    c.line(3, 8, 1, 11);
   }),
   fish("carp", "Carp", "Lives in lakes and ponds.", (c) => {
-    fishBody(c, 8, 8, true);
-    c.plot(8, 6);
-    c.plot(8, 10);
+    c.circle(8, 8, 4);
+    c.line(5, 5, 2, 4);
+    c.line(5, 11, 2, 12);
+    c.line(12, 8, 15, 6);
+    c.line(12, 8, 15, 10);
+    c.plot(5, 7);
+    c.plot(8, 5);
+    c.plot(8, 11);
   }),
   fish("catfish", "Catfish", "A whiskered rainy-day fish.", (c) => {
-    fishBody(c, 8, 8, true);
-    c.plot(12, 6);
-    c.plot(13, 7);
-    c.plot(12, 10);
-    c.plot(13, 9);
+    c.line(3, 8, 6, 5);
+    c.hline(6, 12, 5);
+    c.line(12, 5, 14, 8);
+    c.line(14, 8, 12, 11);
+    c.hline(6, 12, 11);
+    c.line(6, 11, 3, 8);
+    c.line(3, 8, 1, 5);
+    c.line(3, 8, 1, 11);
+    c.line(12, 7, 15, 5);
+    c.line(12, 9, 15, 11);
+    c.plot(11, 7);
   }),
   fish("salmon", "Salmon", "A strong fall river fish.", (c) => {
-    fishBody(c, 8, 8, false);
-    c.line(8, 5, 11, 3);
+    c.line(2, 8, 5, 5);
+    c.hline(5, 12, 5);
+    c.line(12, 5, 15, 8);
+    c.line(15, 8, 12, 10);
+    c.hline(5, 12, 10);
+    c.line(5, 10, 2, 8);
+    c.line(2, 8, 0, 5);
+    c.line(2, 8, 0, 11);
+    c.line(8, 5, 10, 2);
+    c.plot(12, 7);
   }),
   fish("tuna", "Tuna", "An ocean fish with a crescent tail.", (c) => {
     c.circle(7, 8, 4, true);
@@ -710,13 +865,23 @@ export const objectDrafts: ObjectDraft[] = [
     "Pufferfish",
     "A round ocean fish. Handle carefully.",
     (c) => {
-      c.circle(8, 8, 5, true);
-      c.plot(4, 5);
-      c.plot(12, 5);
-      c.plot(4, 11);
-      c.plot(12, 11);
-      c.plot(8, 3);
-      c.plot(8, 13);
+      c.circle(8, 8, 4);
+      c.points([
+        [8, 2],
+        [5, 3],
+        [11, 3],
+        [3, 5],
+        [13, 5],
+        [2, 8],
+        [14, 8],
+        [3, 11],
+        [13, 11],
+        [5, 13],
+        [11, 13],
+        [8, 14],
+      ]);
+      c.plot(10, 7);
+      c.plot(11, 9);
     },
   ),
   fish("squid", "Squid", "A night ocean catch with tentacles.", (c) => {
@@ -739,8 +904,15 @@ export const objectDrafts: ObjectDraft[] = [
   }),
 
   food("egg", "Egg", ["animal-product"], "A chicken egg.", (c) => {
-    c.circle(8, 9, 4, true);
-    c.hline(6, 10, 5);
+    c.hline(7, 9, 4);
+    c.line(7, 4, 5, 7);
+    c.vline(5, 7, 10);
+    c.line(5, 10, 7, 13);
+    c.hline(7, 9, 13);
+    c.line(9, 13, 11, 10);
+    c.vline(11, 7, 10);
+    c.line(11, 7, 9, 4);
+    c.plot(8, 8);
   }),
   food(
     "duck-egg",
@@ -748,8 +920,15 @@ export const objectDrafts: ObjectDraft[] = [
     ["animal-product"],
     "A larger pale egg.",
     (c) => {
-      c.circle(8, 8, 5, true);
-      c.hline(6, 10, 4);
+      c.hline(7, 9, 3);
+      c.line(7, 3, 5, 6);
+      c.vline(5, 6, 10);
+      c.line(5, 10, 7, 13);
+      c.hline(7, 9, 13);
+      c.line(9, 13, 11, 10);
+      c.vline(11, 6, 10);
+      c.line(11, 6, 9, 3);
+      c.plot(8, 6);
     },
   ),
   food("milk", "Milk", ["animal-product"], "Fresh cow milk.", (c) => {
@@ -763,10 +942,17 @@ export const objectDrafts: ObjectDraft[] = [
     ["animal-product"],
     "Creamy goat milk.",
     (c) => {
-      c.rect(5, 4, 6, 9);
+      c.rect(4, 5, 8, 8);
       c.hline(6, 9, 3);
-      c.plot(7, 7);
-      c.plot(8, 8);
+      c.line(6, 3, 4, 5);
+      c.line(9, 3, 11, 5);
+      c.points([
+        [6, 7],
+        [7, 8],
+        [9, 8],
+        [10, 7],
+      ]);
+      c.hline(6, 9, 13);
     },
   ),
   food("wool", "Wool", ["animal-product"], "Fluffy sheep wool.", (c) => {
@@ -806,9 +992,12 @@ export const objectDrafts: ObjectDraft[] = [
     ["animal-product"],
     "A rare pig-foraged fungus.",
     (c) => {
-      c.circle(8, 8, 4, true);
-      c.plot(6, 7);
-      c.plot(10, 9);
+      c.circle(6, 8, 3);
+      c.circle(10, 8, 3);
+      c.circle(8, 10, 3);
+      c.plot(5, 6);
+      c.plot(10, 7);
+      c.plot(8, 11);
     },
   ),
   food("cloth", "Cloth", ["crafted"], "Woven fabric from wool.", (c) => {
@@ -833,9 +1022,13 @@ export const objectDrafts: ObjectDraft[] = [
     ["crafted", "artisan"],
     "A wheel of cow cheese.",
     (c) => {
-      c.circle(8, 8, 5, true);
-      c.plot(6, 7);
-      c.plot(10, 9);
+      c.line(3, 11, 4, 6);
+      c.line(4, 6, 8, 3);
+      c.line(8, 3, 13, 7);
+      c.line(13, 7, 12, 12);
+      c.hline(3, 12, 12);
+      c.line(8, 3, 8, 12);
+      c.circle(10, 8, 1);
     },
   ),
   food(
@@ -844,9 +1037,11 @@ export const objectDrafts: ObjectDraft[] = [
     ["crafted", "artisan"],
     "A tangy goat cheese wheel.",
     (c) => {
-      c.circle(8, 8, 5);
-      c.hline(4, 12, 8);
-      c.plot(8, 5);
+      c.circle(8, 9, 5);
+      c.hline(3, 13, 9);
+      c.line(8, 4, 6, 9);
+      c.line(8, 4, 10, 9);
+      c.circle(8, 7, 1);
     },
   ),
   food(
@@ -864,7 +1059,9 @@ export const objectDrafts: ObjectDraft[] = [
   food("jam", "Jam", ["crafted", "artisan"], "Preserved fruit spread.", (c) => {
     c.rect(5, 5, 6, 8);
     c.hline(6, 9, 4);
-    c.fillRect(6, 8, 4, 4);
+    c.hline(6, 9, 8);
+    c.circle(8, 10, 2);
+    c.plot(8, 7);
   }),
   food(
     "pickles",
@@ -903,7 +1100,33 @@ export const objectDrafts: ObjectDraft[] = [
     c.plot(8, 3);
   }),
   food("fried-egg", "Fried Egg", ["cooked"], "A simple breakfast fry.", (c) => {
-    c.circle(8, 8, 5);
+    c.points([
+      [7, 3],
+      [10, 4],
+      [12, 3],
+      [14, 6],
+      [13, 9],
+      [14, 12],
+      [10, 13],
+      [7, 12],
+      [4, 13],
+      [2, 10],
+      [3, 7],
+      [2, 5],
+      [5, 4],
+    ]);
+    c.line(7, 3, 10, 4);
+    c.line(12, 3, 14, 6);
+    c.line(14, 6, 13, 9);
+    c.line(13, 9, 14, 12);
+    c.line(14, 12, 10, 13);
+    c.line(10, 13, 7, 12);
+    c.line(7, 12, 4, 13);
+    c.line(4, 13, 2, 10);
+    c.line(2, 10, 3, 7);
+    c.line(3, 7, 2, 5);
+    c.line(2, 5, 5, 4);
+    c.line(5, 4, 7, 3);
     c.circle(8, 8, 2, true);
   }),
   food("hashbrowns", "Hashbrowns", ["cooked"], "Crispy fried potato.", (c) => {
@@ -975,9 +1198,12 @@ export const objectDrafts: ObjectDraft[] = [
     c.hline(5, 10, 14);
   }),
   machine("charcoal-kiln", "Charcoal Kiln", "Turns wood into coal.", (c) => {
-    c.rect(3, 4, 10, 10);
-    c.circle(8, 9, 2);
-    c.hline(4, 11, 4);
+    c.rect(3, 6, 10, 8);
+    c.hline(4, 11, 5);
+    c.rect(9, 1, 3, 5);
+    c.line(5, 13, 5, 9);
+    c.circle(8, 10, 3);
+    c.plot(8, 12);
   }),
   machine("keg", "Keg", "Brews wine, juice, and ale.", (c) => {
     c.rect(4, 3, 8, 11);
@@ -1000,9 +1226,13 @@ export const objectDrafts: ObjectDraft[] = [
     "Mayonnaise Machine",
     "Turns eggs into mayonnaise.",
     (c) => {
-      c.rect(3, 4, 10, 10);
-      c.circle(8, 9, 2);
-      c.plot(8, 6);
+      c.rect(4, 6, 8, 8);
+      c.hline(5, 10, 5);
+      c.circle(8, 3, 2);
+      c.vline(8, 5, 7);
+      c.circle(8, 10, 2);
+      c.plot(6, 13);
+      c.plot(10, 13);
     },
   ),
   machine("loom", "Loom", "Weaves wool into cloth.", (c) => {
@@ -1327,10 +1557,20 @@ export const objectDrafts: ObjectDraft[] = [
     ["special", "animal-product"],
     "An ancient egg that might hatch.",
     (c) => {
-      c.circle(8, 8, 5, true);
-      c.plot(6, 6);
-      c.plot(9, 7);
-      c.plot(7, 10);
+      c.hline(7, 9, 2);
+      c.line(7, 2, 4, 6);
+      c.vline(4, 6, 10);
+      c.line(4, 10, 7, 14);
+      c.hline(7, 9, 14);
+      c.line(9, 14, 12, 10);
+      c.vline(12, 6, 10);
+      c.line(12, 6, 9, 2);
+      c.points([
+        [6, 6],
+        [9, 5],
+        [10, 9],
+        [7, 11],
+      ]);
     },
   ),
   item(

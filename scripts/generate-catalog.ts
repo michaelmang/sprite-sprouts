@@ -42,7 +42,12 @@ const villagers: Array<
     description:
       "Town mayor in a top hat and suit. Runs festivals and the community ledger.",
     tags: ["villager", "human", "mayor"],
-    look: { hat: "top", beard: "short", body: "suit" },
+    look: {
+      hat: "top",
+      beard: "short",
+      body: "suit",
+      accessory: "ledger",
+    },
   },
   {
     id: "maren-shopkeep",
@@ -50,7 +55,7 @@ const villagers: Array<
     description:
       "General-store keeper in an apron. Sells seeds, food, and supplies.",
     tags: ["villager", "human", "shopkeeper"],
-    look: { hat: "bun", body: "apron" },
+    look: { hat: "bun", body: "apron", accessory: "basket" },
   },
   {
     id: "bram-blacksmith",
@@ -58,7 +63,12 @@ const villagers: Array<
     description:
       "Blacksmith with a short beard. Upgrades tools and breaks geodes.",
     tags: ["villager", "human", "blacksmith"],
-    look: { hat: "none", beard: "short", body: "apron" },
+    look: {
+      hat: "none",
+      beard: "short",
+      body: "apron",
+      accessory: "hammer",
+    },
   },
   {
     id: "lila-innkeeper",
@@ -66,7 +76,7 @@ const villagers: Array<
     description:
       "Inn and saloon keeper. Serves meals and hosts the evening crowd.",
     tags: ["villager", "human", "innkeeper"],
-    look: { hat: "beret", body: "dress" },
+    look: { hat: "beret", body: "dress", accessory: "mug" },
   },
   {
     id: "joss-fisher",
@@ -74,7 +84,12 @@ const villagers: Array<
     description:
       "Harbor fisher in a sou'wester. Sells bait and talks about the tides.",
     tags: ["villager", "human", "fisher"],
-    look: { hat: "souwester", beard: "long", body: "coat" },
+    look: {
+      hat: "souwester",
+      beard: "long",
+      body: "coat",
+      accessory: "fish",
+    },
   },
   {
     id: "sage-willowisp",
@@ -82,14 +97,19 @@ const villagers: Array<
     description:
       "Tower wizard in a pointed hat and robe. Unlocks magic and the spirit forest.",
     tags: ["villager", "human", "wizard"],
-    look: { hat: "pointed", beard: "long", body: "robe" },
+    look: {
+      hat: "pointed",
+      beard: "long",
+      body: "robe",
+      accessory: "staff",
+    },
   },
   {
     id: "nora-carpenter",
     name: "Nora",
     description: "Carpenter in a bandana. Builds farm buildings and furniture.",
     tags: ["villager", "human", "carpenter"],
-    look: { hat: "bandana", body: "overalls" },
+    look: { hat: "bandana", body: "overalls", accessory: "saw" },
   },
   {
     id: "theo-doctor",
@@ -97,7 +117,12 @@ const villagers: Array<
     description:
       "Clinic doctor with glasses. Treats exhaustion and sells medicine.",
     tags: ["villager", "human", "doctor"],
-    look: { hat: "none", glasses: true, body: "coat" },
+    look: {
+      hat: "none",
+      glasses: true,
+      body: "coat",
+      accessory: "stethoscope",
+    },
   },
   {
     id: "iris-librarian",
@@ -105,7 +130,12 @@ const villagers: Array<
     description:
       "Librarian with a bun and glasses. Collects lost books and village lore.",
     tags: ["villager", "human", "librarian"],
-    look: { hat: "bun", glasses: true, body: "dress" },
+    look: {
+      hat: "bun",
+      glasses: true,
+      body: "dress",
+      accessory: "book",
+    },
   },
   {
     id: "caleb-rancher",
@@ -113,7 +143,7 @@ const villagers: Array<
     description:
       "Neighboring rancher. Offers animal advice and the first hay bale.",
     tags: ["villager", "human", "rancher"],
-    look: { hat: "cap", body: "overalls" },
+    look: { hat: "cap", body: "overalls", accessory: "pitchfork" },
   },
   {
     id: "pip-child",
@@ -121,7 +151,12 @@ const villagers: Array<
     description:
       "A small town kid with a cowlick. Often found chasing beetles.",
     tags: ["villager", "human", "child"],
-    look: { hat: "cowlick", body: "shorts", scale: "child" },
+    look: {
+      hat: "cowlick",
+      body: "shorts",
+      scale: "child",
+      accessory: "net",
+    },
   },
   {
     id: "gran-heather",
@@ -129,7 +164,7 @@ const villagers: Array<
     description:
       "Elder in a bun and shawl. Knows forage spots and old recipes.",
     tags: ["villager", "human", "elder"],
-    look: { hat: "bun", body: "dress" },
+    look: { hat: "bun", body: "dress", accessory: "cane" },
   },
   {
     id: "rex-miner",
@@ -137,7 +172,12 @@ const villagers: Array<
     description:
       "Adventurer-miner with a hard hat. Hangs around the guild and the mines.",
     tags: ["villager", "human", "miner"],
-    look: { hat: "hardhat", beard: "short", body: "coat" },
+    look: {
+      hat: "hardhat",
+      beard: "short",
+      body: "coat",
+      accessory: "pickaxe",
+    },
   },
   {
     id: "wren-artist",
@@ -145,7 +185,7 @@ const villagers: Array<
     description:
       "Painter in a beret. Sells furniture catalogs and seasonal decorations.",
     tags: ["villager", "human", "artist"],
-    look: { hat: "beret", body: "overalls" },
+    look: { hat: "beret", body: "overalls", accessory: "palette" },
   },
   {
     id: "ash-wanderer",
@@ -153,7 +193,7 @@ const villagers: Array<
     description:
       "Cloaked wanderer. Appears at the bus stop and the mountain shrine.",
     tags: ["villager", "human", "wanderer"],
-    look: { hat: "hood", body: "robe" },
+    look: { hat: "hood", body: "robe", accessory: "lantern" },
   },
 ];
 

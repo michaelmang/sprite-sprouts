@@ -52,6 +52,7 @@ The catalog site reads the same `sprites/` tree. Desktop tools can also hit `/ap
 ```bash
 yarn dev                 # catalog at http://localhost:3000
 yarn sprites:validate    # schema + folder/id checks
+yarn sprites:audit       # duplicate, density, and silhouette checks
 yarn sprites:render      # rewrite outline.svg from sprite.json
 yarn sprites:catalog      # regenerate the valley outline set
 yarn lint

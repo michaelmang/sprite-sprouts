@@ -22,6 +22,21 @@ yarn sprites:catalog
 
 Characters are 16×32. Objects are 16×16. All start as `#` / `.` outlines.
 
+### Outline art direction
+
+- **Read at thumbnail size.** The outer contour should identify the asset before
+  the label does.
+- **Use role props.** Villagers carry a job-specific item (staff, ledger,
+  hammer, fish, saw, book, net, or similar), not just a different hat.
+- **Prefer contour and negative space over solid fill.** The audit rejects
+  over-dense shapes that turn into dark blobs.
+- **Keep families coherent, not identical.** Seed packets share a package shape,
+  milk bottles share a vessel shape, and saplings share a trunk; their internal
+  marks and contours distinguish the variant.
+- **Never reuse a silhouette.** `yarn sprites:audit` fails on exact
+  translation-normalized duplicates, empty/tiny drawings, and excessive local
+  density. It also reports close neighbors for human review.
+
 ### Characters
 
 - **Player** — `willow-farmer`
