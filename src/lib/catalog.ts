@@ -65,3 +65,84 @@ export async function getSprite(
     ) ?? null
   );
 }
+
+const characterCategoryOrder = ["Player", "Villagers", "Animals"];
+const objectCategoryOrder = [
+  "Tools",
+  "Crops",
+  "Seeds",
+  "Forage",
+  "Resources",
+  "Gems & minerals",
+  "Fish",
+  "Food & artisan",
+  "Machines",
+  "Furniture",
+  "Farm & world",
+  "Special",
+  "Other",
+];
+
+export function categoryFor(sprite: SpriteDocument): string {
+  if (sprite.kind === "character") {
+    if (sprite.tags.includes("player")) {
+      return "Player";
+    }
+    if (sprite.tags.includes("animal")) {
+      return "Animals";
+    }
+    return "Villagers";
+  }
+
+  const labels: Record<string, string> = {
+    tool: "Tools",
+    crop: "Crops",
+    seed: "Seeds",
+    forage: "Forage",
+    resource: "Resources",
+    gem: "Gems & minerals",
+    mineral: "Gems & minerals",
+    fish: "Fish",
+    food: "Food & artisan",
+    machine: "Machines",
+    furniture: "Furniture",
+    farm: "Farm & world",
+    world: "Farm & world",
+    tree: "Farm & world",
+    gift: "Special",
+    special: "Special",
+    artifact: "Special",
+  };
+
+  for (const tag of sprite.tags) {
+    const label = labels[tag];
+    if (label) {
+      return label;
+    }
+  }
+
+  return "Other";
+}
+
+export function groupByCategory(
+  entries: CatalogEntry[],
+  kind: SpriteKind,
+): Array<{ category: string; entries: CatalogEntry[] }> {
+  const order =
+    kind === "character" ? characterCategoryOrder : objectCategoryOrder;
+  const groups = new Map<string, CatalogEntry[]>();
+
+  for (const entry of entries.filter((item) => item.sprite.kind === kind)) {
+    const category = categoryFor(entry.sprite);
+    const list = groups.get(category) ?? [];
+    list.push(entry);
+    groups.set(category, list);
+  }
+
+  return order
+    .filter((category) => groups.has(category))
+    .map((category) => ({
+      category,
+      entries: groups.get(category) ?? [],
+    }));
+}

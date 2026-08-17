@@ -6,7 +6,7 @@ There is a Next.js browser so you can preview the catalog, plus JSON Schema and 
 
 ## Pull this sample
 
-The starter character is Willow, a 16×32 farmer outline:
+The starter farmer is Willow, plus a full valley catalog of townsfolk, animals, tools, crops, and items:
 
 ```text
 sprites/characters/willow-farmer/
@@ -53,7 +53,7 @@ The catalog site reads the same `sprites/` tree. Desktop tools can also hit `/ap
 yarn dev                 # catalog at http://localhost:3000
 yarn sprites:validate    # schema + folder/id checks
 yarn sprites:render      # rewrite outline.svg from sprite.json
-yarn sprites:new character my-npc
+yarn sprites:catalog      # regenerate the valley outline set
 yarn lint
 yarn format
 yarn typecheck
