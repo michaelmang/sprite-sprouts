@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/michaelmang/sprite-sprouts/blob/main/schemas/sprite.schema.json",
+  "title": "Sprite Sprouts document",
+  "description": "A pixel-art sprite outline or finalized sprite for a Stardew Valley-like game. Desktop tools should treat this JSON file as the source of truth.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "kind",
+    "status",
+    "description",
+    "canvas",
+    "pivot",
+    "palette",
+    "frames",
+    "animations"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Must match the folder name."
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "kind": { "enum": ["character", "object"] },
+    "status": {
+      "enum": ["outline", "in-progress", "final"],
+      "description": "outline = AI draft to pull; in-progress = claimed locally; final = painted work uploaded back."
+    },
+    "description": { "type": "string", "minLength": 1 },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "pivot": {
+      "type": "object",
+      "description": "Anchor used by game engines, usually the feet.",
+      "additionalProperties": false,
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "palette": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "type": "string", "minLength": 1, "maxLength": 1 },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "color"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "color": {
+            "type": ["string", "null"],
+            "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$"
+          }
+        }
+      }
+    },
+    "frames": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["pixels"],
+        "properties": {
+          "pixels": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "animations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "frameMs", "directions"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "frameMs": { "type": "integer", "minimum": 1 },
+          "directions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "down": { "$ref": "#/$defs/frameIdList" },
+              "right": { "$ref": "#/$defs/frameIdList" },
+              "up": { "$ref": "#/$defs/frameIdList" },
+              "left": { "$ref": "#/$defs/frameIdList" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "frameIdList": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}
