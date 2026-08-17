@@ -447,7 +447,7 @@ async function writeSprite(sprite: SpriteDocument): Promise<void> {
     `${JSON.stringify(sprite, null, 2)}\n`,
   );
   await writeFile(
-    path.join(dir, "outline.svg"),
+    path.join(dir, "preview.svg"),
     `${pixelsToSvg(sprite, previewFrame)}\n`,
   );
   await writeFile(

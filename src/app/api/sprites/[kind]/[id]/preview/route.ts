@@ -9,11 +9,11 @@ const kindFromFolder: Record<string, SpriteKind> = {
   objects: "object",
 };
 
-type OutlineRouteProps = {
+type PreviewRouteProps = {
   params: Promise<{ kind: string; id: string }>;
 };
 
-export async function GET(_request: Request, { params }: OutlineRouteProps) {
+export async function GET(_request: Request, { params }: PreviewRouteProps) {
   const { kind, id } = await params;
   const spriteKind = kindFromFolder[kind];
   if (!spriteKind) {
@@ -38,7 +38,7 @@ export async function GET(_request: Request, { params }: OutlineRouteProps) {
   return new Response(svg, {
     headers: {
       "Content-Type": "image/svg+xml; charset=utf-8",
-      "Content-Disposition": `attachment; filename="${entry.sprite.id}-outline.svg"`,
+      "Content-Disposition": `attachment; filename="${entry.sprite.id}-preview.svg"`,
     },
   });
 }

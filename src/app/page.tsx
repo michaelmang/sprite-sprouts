@@ -19,13 +19,14 @@ export default async function Home() {
           Stardew-like sprite catalog
         </p>
         <h1 className="mt-2 text-4xl font-semibold tracking-tight">
-          Outlines in, painted sprites back.
+          Painted drafts in, finished sprites back.
         </h1>
         <p className="text-soil mt-4 text-lg leading-8">
-          {characterCount} character and {objectCount} object outlines covering
-          a full valley: townsfolk, farm animals, tools, crops, forage, mines,
-          fish, artisan goods, machines, and furniture. Pull a folder into your
-          desktop software, paint it, then upload the finished sprite back.
+          {characterCount} character and {objectCount} object sprites covering a
+          full valley: townsfolk, farm animals, tools, crops, forage, mines,
+          fish, artisan goods, machines, and furniture. Every sprite ships
+          painted with an outline, body, and shading, so you can pull a folder
+          into your desktop software, refine it, and upload it back.
         </p>
       </section>
 

@@ -89,14 +89,14 @@ async function main() {
   }
 
   await mkdir(dir, { recursive: true });
-  const svgPath = path.join(dir, "outline.svg");
+  const svgPath = path.join(dir, "preview.svg");
   const notesPath = path.join(dir, "notes.md");
 
   await writeFile(jsonPath, `${JSON.stringify(sprite, null, 2)}\n`);
   await writeFile(svgPath, `${pixelsToSvg(sprite, "idle-down")}\n`);
   await writeFile(
     notesPath,
-    `# ${name}\n\nStatus: outline\n\nDraw into \`sprite.json\`, then run \`yarn sprites:render\`.\n`,
+    `# ${name}\n\nStatus: outline\n\nPaint into \`sprite.json\`, then run \`yarn sprites:render\`.\n`,
   );
 
   console.log(`Created ${path.posix.join("sprites", kindFolder[kind], id)}`);

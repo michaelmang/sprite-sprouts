@@ -5,14 +5,14 @@ This directory is the source of truth for desktop software.
 ```text
 sprites/
   characters/<id>/
-    sprite.json      # required — pixel grid + metadata
-    outline.svg      # generated preview (`yarn sprites:render`)
+    sprite.json      # required — pixel grid, palette, animations
+    preview.svg      # generated colour preview (`yarn sprites:render`)
     notes.md         # optional art notes
   objects/<id>/
     ...same files
 ```
 
-Regenerate the valley catalog (does not overwrite `willow-farmer`) with:
+Regenerate the valley catalog with:
 
 ```bash
 yarn sprites:catalog
@@ -20,25 +20,9 @@ yarn sprites:catalog
 
 ## Catalog
 
-Characters are 16×32. Objects are 16×16. All start as `#` / `.` outlines.
-
-### Outline art direction
-
-- **Read at thumbnail size.** The outer contour should identify the asset before
-  the label does.
-- **Use role props.** Villagers carry a job-specific item (staff, ledger,
-  hammer, fish, saw, book, net, or similar), not just a different hat.
-- **Prefer contour and negative space over solid fill.** The audit rejects
-  over-dense shapes that turn into dark blobs.
-- **Keep families coherent, not identical.** Seed packets share a package shape,
-  milk bottles share a vessel shape, and saplings share a trunk; their internal
-  marks and contours distinguish the variant.
-- **Never reuse a silhouette.** `yarn sprites:audit` fails on exact
-  translation-normalized duplicates, empty/tiny drawings, and excessive local
-  density. It checks corresponding character directions, true animal rear
-  views, walk-phase separation, and bottom-edge clipping. It also reports close
-  neighbors at 78% silhouette overlap or above and fails until they are
-  differentiated.
+Characters are 16×32. Objects are 16×16. Every sprite ships painted: a warm
+dark outline, a filled body, and lit and shadowed steps drawn from a shared
+material palette.
 
 ### Characters
 
@@ -61,11 +45,29 @@ Characters are 16×32. Objects are 16×16. All start as `#` / `.` outlines.
 - **Farm & world** — shipping bin, mailbox, fence, gate, saplings, weeds, rocks, stumps
 - **Special** — bouquet, heart pendant, dinosaur egg, artifacts, star drop
 
+## Art direction
+
+Modelled on the Stardew Valley item sheet:
+
+- **Fill the tile.** Object art spans at least 11 of the 16 pixels on its long
+  side. Empty margins read as unfinished icons.
+- **Four-step materials.** Each material carries an outline, a shadow, a body,
+  and a highlight. The outline is a warm dark tone, never pure black.
+- **Light from the top left.** Bodies take the highlight along their upper edge
+  and the shadow along the lower and right edges.
+- **Read at thumbnail size.** The shape should identify the asset before the
+  label does; villagers carry a job-specific prop in every direction.
+- **Materials carry meaning.** Wooden handles, metal heads, leafy tops, and
+  cloth bands are painted as separate zones instead of one flat colour.
+- **Never reuse a sprite.** `yarn sprites:audit` fails on duplicate art, close
+  painted neighbours, flat or undersized shapes, copied animal rear views,
+  identical walk phases, and bottom-edge clipping.
+
 ## Workflow
 
-1. **AI outline** — add a folder under `characters/` or `objects/` with `status: "outline"`.
-2. **Pull** — clone or `git pull`, then open `sprite.json` (and `outline.svg`) in your local tool.
-3. **Paint** — expand the palette and fill interior pixels. Set `status` to `"in-progress"` if you want to mark it claimed.
+1. **AI draft** — add a folder under `characters/` or `objects/` with `status: "outline"`.
+2. **Pull** — clone or `git pull`, then open `sprite.json` (and `preview.svg`) in your local tool.
+3. **Refine** — adjust the palette and pixels. Set `status` to `"in-progress"` if you want to mark it claimed.
 4. **Upload** — set `status` to `"final"`, run `yarn sprites:render`, commit, and push.
 
 Scaffold a blank sprite with:

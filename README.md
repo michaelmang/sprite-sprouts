@@ -1,6 +1,6 @@
 # Sprite Sprouts
 
-A small catalog for **Stardew Valley-like sprite outlines**. AI can generate character and object outlines into this repo; you pull those files into desktop software, paint them, and push the finished sprites back to the same folders.
+A small catalog of **Stardew Valley-like sprites**. AI generates painted character and object drafts into this repo; you pull those files into desktop software, refine them, and push the finished sprites back to the same folders.
 
 There is a Next.js browser so you can preview the catalog, plus JSON Schema and scripts so the files stay consistent.
 
@@ -11,7 +11,7 @@ The starter farmer is Willow, plus a full valley catalog of townsfolk, animals, 
 ```text
 sprites/characters/willow-farmer/
   sprite.json     # grids, palette, animations — import this
-  outline.svg     # idle-down picture of the same data
+  preview.svg     # idle-down picture of the same data
   notes.md
 ```
 
@@ -30,17 +30,19 @@ scripts/                  # validate, scaffold, render SVG
 
 Each sprite folder is one asset. Status on the JSON document is `outline`, `in-progress`, or `final`.
 
-| Status        | Meaning                                        |
-| ------------- | ---------------------------------------------- |
-| `outline`     | AI (or a person) drew line work; ready to pull |
-| `in-progress` | Claimed locally                                |
-| `final`       | Painted work uploaded back                     |
+| Status        | Meaning                           |
+| ------------- | --------------------------------- |
+| `outline`     | AI-generated draft; ready to pull |
+| `in-progress` | Claimed locally                   |
+| `final`       | Finished work uploaded back       |
 
-Characters default to **16×32**. Objects default to **16×16**. Pixels are strings of palette keys: `.` is empty, `#` is the outline. Add more one-character keys when you color the sprite.
+Characters default to **16×32**. Objects default to **16×16**. Pixels are strings of palette keys and `.` is empty; each sprite carries its own palette of outline, shadow, body, and highlight colours.
+
+Art direction follows the game's item sheet: sprites fill their tile, use a warm dark outline rather than pure black, and light from the top left. See [`sprites/README.md`](sprites/README.md) for the full guide.
 
 ## Workflow
 
-1. Generate or scaffold an outline (`yarn sprites:new character river-npc`).
+1. Generate or scaffold a draft (`yarn sprites:new character river-npc`).
 2. Pull `sprites/<kind>/<id>/` onto your machine.
 3. Edit `sprite.json` in custom software. Keep canvas size and pivot (`x,y` at the feet) unless the game needs something else.
 4. Set `"status": "final"`, run `yarn sprites:render`, commit, and push.
@@ -52,9 +54,9 @@ The catalog site reads the same `sprites/` tree. Desktop tools can also hit `/ap
 ```bash
 yarn dev                 # catalog at http://localhost:3000
 yarn sprites:validate    # schema + folder/id checks
-yarn sprites:audit       # duplicate, density, and silhouette checks
-yarn sprites:render      # rewrite outline.svg from sprite.json
-yarn sprites:catalog      # regenerate the valley outline set
+yarn sprites:audit       # duplicate, fill, colour, and direction checks
+yarn sprites:render      # rewrite preview.svg from sprite.json
+yarn sprites:catalog     # regenerate the painted valley catalog
 yarn lint
 yarn format
 yarn typecheck

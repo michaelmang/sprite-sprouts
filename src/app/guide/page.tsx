@@ -12,11 +12,11 @@ export default function GuidePage() {
           Pull &amp; upload
         </h1>
         <p className="text-soil mt-3 leading-7">
-          The git repo is the handoff. AI writes outlines into{" "}
+          The git repo is the handoff. AI writes painted drafts into{" "}
           <code className="bg-paper rounded px-1.5 py-0.5 font-mono text-sm">
             sprites/
           </code>
-          , you pull them onto your desktop, then commit the painted files back
+          , you pull them onto your desktop, then commit the finished files back
           to the same paths.
         </p>
       </div>
@@ -31,14 +31,14 @@ export default function GuidePage() {
         <li>
           Open <span className="font-mono text-sm">sprite.json</span> in your
           custom software. The pixel grids, palette, animations, and pivot live
-          there. <span className="font-mono text-sm">outline.svg</span> is the
+          there. <span className="font-mono text-sm">preview.svg</span> is the
           same idle pose as a picture.
         </li>
         <li>
-          Paint interiors by adding palette keys (skin, hat, shirt, and so on)
-          and replacing <span className="font-mono text-sm">.</span> cells. Keep{" "}
-          <span className="font-mono text-sm">#</span> as the outline unless you
-          are replacing the line work.
+          Refine the art. Each sprite arrives with its own palette of outline,
+          shadow, body, and highlight colours; adjust those entries or repaint
+          individual cells. Keep the outline a warm dark tone and light the
+          shape from the top left.
         </li>
         <li>
           Set <span className="font-mono text-sm">status</span> to{" "}
