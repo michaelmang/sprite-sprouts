@@ -419,12 +419,16 @@ export const objectDrafts: ObjectDraft[] = [
     "Wild Horseradish",
     "A spicy spring forage root.",
     (c) => {
-      c.vline(8, 5, 13);
-      c.plot(7, 7);
-      c.plot(9, 8);
-      c.plot(6, 4);
-      c.plot(10, 4);
-      c.plot(8, 3);
+      c.line(6, 6, 5, 10);
+      c.line(5, 10, 8, 14);
+      c.line(8, 14, 11, 10);
+      c.line(11, 10, 10, 6);
+      c.hline(6, 10, 6);
+      c.line(7, 6, 4, 2);
+      c.line(8, 6, 8, 1);
+      c.line(9, 6, 12, 2);
+      c.plot(6, 9);
+      c.plot(9, 11);
     },
   ),
   forage("daffodil", "Daffodil", "A yellow spring wildflower.", (c) => {
@@ -835,10 +839,14 @@ export const objectDrafts: ObjectDraft[] = [
     c.plot(12, 11);
   }),
   fish("eel", "Eel", "A long night-ocean fish.", (c) => {
-    c.line(3, 11, 6, 6);
-    c.line(6, 6, 10, 9);
-    c.line(10, 9, 13, 4);
-    c.plot(13, 3);
+    c.line(2, 12, 5, 7);
+    c.line(3, 13, 6, 8);
+    c.line(5, 7, 9, 10);
+    c.line(6, 8, 9, 11);
+    c.line(9, 10, 13, 4);
+    c.line(9, 11, 14, 5);
+    c.hline(13, 14, 4);
+    c.plot(13, 6);
   }),
   fish(
     "pufferfish",
@@ -947,11 +955,14 @@ export const objectDrafts: ObjectDraft[] = [
     ["animal-product"],
     "A soft iridescent feather.",
     (c) => {
-      c.line(4, 12, 12, 3);
-      c.plot(11, 3);
-      c.plot(12, 4);
-      c.plot(6, 9);
-      c.plot(8, 7);
+      c.line(4, 13, 11, 3);
+      c.line(5, 13, 12, 4);
+      c.line(11, 3, 13, 5);
+      c.line(13, 5, 10, 10);
+      c.line(10, 10, 5, 13);
+      c.line(6, 10, 11, 7);
+      c.line(8, 7, 12, 5);
+      c.line(8, 11, 4, 12);
     },
   ),
   food(
@@ -1450,9 +1461,13 @@ export const objectDrafts: ObjectDraft[] = [
     },
   ),
   world("twig", "Twig", ["world"], "A fallen branch. Chop for wood.", (c) => {
-    c.line(3, 11, 12, 4);
-    c.plot(6, 8);
-    c.plot(10, 6);
+    c.line(2, 12, 12, 4);
+    c.line(3, 13, 13, 5);
+    c.line(6, 10, 5, 6);
+    c.line(7, 9, 6, 5);
+    c.line(10, 7, 13, 8);
+    c.line(11, 6, 14, 7);
+    c.hline(1, 3, 12);
   }),
   world(
     "crop-sprout",
@@ -1460,11 +1475,15 @@ export const objectDrafts: ObjectDraft[] = [
     ["crop"],
     "Generic first-growth crop tile.",
     (c) => {
-      c.hline(3, 13, 13);
-      c.plot(8, 9);
-      c.plot(7, 10);
-      c.plot(9, 10);
-      c.plot(8, 11);
+      c.hline(2, 14, 13);
+      c.hline(4, 12, 14);
+      c.vline(8, 6, 12);
+      c.line(8, 8, 4, 5);
+      c.line(8, 9, 3, 7);
+      c.line(8, 8, 12, 5);
+      c.line(8, 9, 13, 7);
+      c.plot(4, 6);
+      c.plot(12, 6);
     },
   ),
   world(
@@ -1516,19 +1535,21 @@ export const objectDrafts: ObjectDraft[] = [
     ["gift", "special"],
     "A charm used to propose.",
     (c) => {
-      c.plot(8, 13);
-      c.vline(8, 9, 12);
-      c.plot(6, 5);
-      c.plot(10, 5);
-      c.plot(5, 6);
-      c.plot(11, 6);
-      c.plot(6, 7);
-      c.plot(10, 7);
-      c.plot(7, 8);
-      c.plot(9, 8);
-      c.plot(8, 9);
-      c.plot(7, 4);
-      c.plot(9, 4);
+      c.circle(8, 3, 2);
+      c.vline(8, 5, 7);
+      c.points([
+        [5, 7],
+        [6, 6],
+        [8, 8],
+        [10, 6],
+        [11, 7],
+      ]);
+      c.line(5, 7, 5, 9);
+      c.line(11, 7, 11, 9);
+      c.line(5, 9, 8, 13);
+      c.line(11, 9, 8, 13);
+      c.plot(7, 9);
+      c.plot(9, 9);
     },
   ),
   item(

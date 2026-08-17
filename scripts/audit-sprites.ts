@@ -121,12 +121,73 @@ async function main() {
 
   const weak = shapes.filter(
     (shape) =>
-      shape.ink < 8 ||
+      shape.ink < 18 ||
       shape.bounds.width < 3 ||
       shape.bounds.height < 3 ||
       shape.localDensity > 0.72 ||
       shape.ink > shape.pixels.length * (shape.pixels[0]?.length ?? 0) * 0.58,
   );
+
+  const frameRoles = [
+    "idle-down",
+    "idle-right",
+    "idle-up",
+    "walk-down-left",
+    "walk-down-right",
+  ] as const;
+  const directionalDuplicates: Array<{
+    frameId: string;
+    ids: string[];
+  }> = [];
+  const frameFaults: string[] = [];
+
+  for (const frameId of frameRoles) {
+    const bySignature = new Map<string, string[]>();
+    for (const entry of entries.filter(
+      (item) => item.sprite.kind === "character",
+    )) {
+      const pixels = entry.sprite.frames[frameId]?.pixels;
+      if (!pixels) {
+        continue;
+      }
+      const signature = shapeFor(entry.sprite.id, pixels).signature;
+      const ids = bySignature.get(signature) ?? [];
+      ids.push(entry.sprite.id);
+      bySignature.set(signature, ids);
+    }
+    for (const ids of bySignature.values()) {
+      if (ids.length > 1) {
+        directionalDuplicates.push({ frameId, ids });
+      }
+    }
+  }
+
+  for (const entry of entries.filter(
+    (item) => item.sprite.kind === "character",
+  )) {
+    const { sprite } = entry;
+    const down = sprite.frames["idle-down"]?.pixels;
+    const up = sprite.frames["idle-up"]?.pixels;
+    const stepA = sprite.frames["walk-down-left"]?.pixels;
+    const stepB = sprite.frames["walk-down-right"]?.pixels;
+
+    if (
+      sprite.tags.includes("animal") &&
+      down &&
+      up &&
+      down.join("/") === up.join("/")
+    ) {
+      frameFaults.push(`${sprite.id}: animal rear view matches front view`);
+    }
+    if (stepA && stepB && stepA.join("/") === stepB.join("/")) {
+      frameFaults.push(`${sprite.id}: both walk phases are identical`);
+    }
+    for (const [frameId, frame] of Object.entries(sprite.frames)) {
+      if (frame.pixels.at(-1)?.includes("#")) {
+        frameFaults.push(`${sprite.id}/${frameId}: touches bottom canvas edge`);
+      }
+    }
+  }
 
   console.log(`Audited ${shapes.length} sprite previews.`);
   console.log(`Exact duplicate silhouettes: ${exact.length}`);
@@ -145,8 +206,23 @@ async function main() {
       `  - ${shape.id}: ${shape.ink}px, ${shape.bounds.width}×${shape.bounds.height} bounds, ${(shape.localDensity * 100).toFixed(0)}% local density`,
     );
   }
+  console.log(
+    `Duplicate character silhouettes in corresponding directions: ${directionalDuplicates.length}`,
+  );
+  for (const group of directionalDuplicates) {
+    console.log(`  - ${group.frameId}: ${group.ids.join(", ")}`);
+  }
+  console.log(`Directional/frame faults: ${frameFaults.length}`);
+  for (const fault of frameFaults) {
+    console.log(`  - ${fault}`);
+  }
 
-  if (exact.length > 0 || weak.length > 0) {
+  if (
+    exact.length > 0 ||
+    weak.length > 0 ||
+    directionalDuplicates.length > 0 ||
+    frameFaults.length > 0
+  ) {
     process.exitCode = 1;
   }
 }

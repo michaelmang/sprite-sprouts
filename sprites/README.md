@@ -35,7 +35,9 @@ Characters are 16×32. Objects are 16×16. All start as `#` / `.` outlines.
   marks and contours distinguish the variant.
 - **Never reuse a silhouette.** `yarn sprites:audit` fails on exact
   translation-normalized duplicates, empty/tiny drawings, and excessive local
-  density. It also reports close neighbors for human review.
+  density. It checks corresponding character directions, true animal rear
+  views, walk-phase separation, and bottom-edge clipping. It also reports close
+  neighbors for human review.
 
 ### Characters
 
