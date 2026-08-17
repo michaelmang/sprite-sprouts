@@ -219,6 +219,7 @@ async function main() {
 
   if (
     exact.length > 0 ||
+    near.length > 0 ||
     weak.length > 0 ||
     directionalDuplicates.length > 0 ||
     frameFaults.length > 0

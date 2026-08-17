@@ -37,7 +37,8 @@ Characters are 16×32. Objects are 16×16. All start as `#` / `.` outlines.
   translation-normalized duplicates, empty/tiny drawings, and excessive local
   density. It checks corresponding character directions, true animal rear
   views, walk-phase separation, and bottom-edge clipping. It also reports close
-  neighbors for human review.
+  neighbors at 78% silhouette overlap or above and fails until they are
+  differentiated.
 
 ### Characters
 
