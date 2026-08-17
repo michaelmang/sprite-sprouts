@@ -129,26 +129,6 @@ function packet(canvas: PixelCanvas, label: (c: PixelCanvas) => void): void {
   label(canvas);
 }
 
-function fishBody(
-  canvas: PixelCanvas,
-  cx: number,
-  cy: number,
-  tailLeft: boolean,
-): void {
-  canvas.circle(cx, cy, 3, true);
-  if (tailLeft) {
-    canvas.plot(cx - 5, cy - 2);
-    canvas.plot(cx - 4, cy);
-    canvas.plot(cx - 5, cy + 2);
-    canvas.plot(cx + 4, cy - 1);
-  } else {
-    canvas.plot(cx + 5, cy - 2);
-    canvas.plot(cx + 4, cy);
-    canvas.plot(cx + 5, cy + 2);
-    canvas.plot(cx - 4, cy - 1);
-  }
-}
-
 export const objectDrafts: ObjectDraft[] = [
   tool("watering-can", "Watering Can", "Can for watering crop tiles.", (c) => {
     c.rect(3, 6, 8, 6);
