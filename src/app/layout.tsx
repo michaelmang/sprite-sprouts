@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Sprite Sprouts",
-    template: "%s · Sprite Sprouts",
+    default: "Echo the Heartwood",
+    template: "%s · The Long Line",
   },
   description:
-    "AI-generated sprite outlines and finalized pixel art for a Stardew Valley-like game.",
+    "A tiny listening game about hearing and repeating a musical pattern.",
 };
 
 export default function RootLayout({
