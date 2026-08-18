@@ -12,7 +12,7 @@ export async function GET() {
       status: entry.sprite.status,
       path: entry.relativeDir,
       json: `/api/sprites/${kindFolder[entry.sprite.kind]}/${entry.sprite.id}`,
-      svg: `/api/sprites/${kindFolder[entry.sprite.kind]}/${entry.sprite.id}/outline`,
+      svg: `/api/sprites/${kindFolder[entry.sprite.kind]}/${entry.sprite.id}/preview`,
     })),
   });
 }

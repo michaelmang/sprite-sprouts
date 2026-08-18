@@ -675,12 +675,17 @@ export const objectDrafts: ObjectDraft[] = [
     c.vline(7, 4, 11);
   }),
   resource("stone", "Stone", "Common rock for building and tools.", (c) => {
-    c.plot(8, 4);
-    c.line(8, 4, 3, 10);
-    c.line(8, 4, 13, 9);
-    c.hline(3, 13, 11);
-    c.line(3, 10, 5, 11);
-    c.line(13, 9, 12, 11);
+    // Two loose chunks, the smaller one resting in front.
+    c.line(5, 6, 9, 5);
+    c.line(9, 5, 12, 8);
+    c.line(12, 8, 10, 11);
+    c.line(10, 11, 6, 11);
+    c.line(6, 11, 5, 6);
+    c.line(7, 7, 10, 8);
+    c.line(3, 11, 5, 10);
+    c.line(5, 10, 7, 12);
+    c.line(7, 12, 4, 13);
+    c.line(4, 13, 3, 11);
   }),
   resource("fiber", "Fiber", "Weeds and plant fiber for crafting.", (c) => {
     c.line(5, 13, 4, 3);
@@ -1682,9 +1687,16 @@ export const objectDrafts: ObjectDraft[] = [
     },
   ),
   world("rock", "Rock", ["world", "mine"], "A small breakable stone.", (c) => {
-    c.line(8, 5, 3, 11);
-    c.line(8, 5, 13, 10);
-    c.hline(3, 13, 12);
+    // A seated boulder with a split running down the face.
+    c.line(4, 9, 6, 4);
+    c.line(6, 4, 11, 3);
+    c.line(11, 3, 14, 8);
+    c.line(14, 8, 13, 13);
+    c.hline(3, 13, 13);
+    c.line(3, 13, 4, 9);
+    c.line(9, 4, 8, 8);
+    c.line(8, 8, 10, 13);
+    c.plot(5, 10);
   }),
   world(
     "stump",

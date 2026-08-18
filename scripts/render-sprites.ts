@@ -38,16 +38,16 @@ async function main() {
         throw new Error(`No frames to render for ${sprite.id}`);
       }
 
-      const svgPath = path.join(kindDir, folder, "outline.svg");
+      const svgPath = path.join(kindDir, folder, "preview.svg");
       await writeFile(svgPath, `${pixelsToSvg(sprite, previewFrame)}\n`);
       rendered += 1;
       console.log(
-        `Wrote ${path.posix.join("sprites", kindFolder[kind], folder, "outline.svg")}`,
+        `Wrote ${path.posix.join("sprites", kindFolder[kind], folder, "preview.svg")}`,
       );
     }
   }
 
-  console.log(`Rendered ${rendered} outline SVG${rendered === 1 ? "" : "s"}.`);
+  console.log(`Rendered ${rendered} preview SVG${rendered === 1 ? "" : "s"}.`);
 }
 
 main().catch((error: unknown) => {

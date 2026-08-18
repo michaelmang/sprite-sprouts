@@ -112,9 +112,9 @@ export default async function SpritePage({ params }: SpritePageProps) {
               <li>
                 <a
                   className="text-moss underline"
-                  href={`/api/sprites/${kind}/${id}/outline`}
+                  href={`/api/sprites/${kind}/${id}/preview`}
                 >
-                  outline.svg
+                  preview.svg
                 </a>
               </li>
             </ul>

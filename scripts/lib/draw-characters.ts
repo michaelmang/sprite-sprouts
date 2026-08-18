@@ -61,15 +61,23 @@ function legs(
   short = false,
 ): void {
   const height = short ? 5 : 8;
+  const foot = y + height - 1;
+
   if (dress) {
-    canvas.rect(4, y, 8, height);
-    canvas.hline(4, 11, y + height - 1);
+    // A skirt flares to the hem, then only the shoes break the silhouette.
+    canvas.rect(4, y, 8, height - 2);
+    canvas.hline(3, 12, y + height - 3);
+    canvas.rect(4, foot - 1, 3, 2);
+    canvas.rect(9, foot - 1, 3, 2);
     return;
   }
-  canvas.rect(5, y, 3, height - 1);
-  canvas.rect(8, y, 3, height - 1);
-  canvas.hline(4, 7, y + height - 1);
-  canvas.hline(8, 11, y + height - 1);
+
+  // A gap between the legs keeps the walk cycle readable once the body is
+  // filled with colour.
+  canvas.rect(4, y, 3, height - 2);
+  canvas.rect(9, y, 3, height - 2);
+  canvas.rect(3, foot - 1, 4, 2);
+  canvas.rect(9, foot - 1, 4, 2);
 }
 
 function accessoryDown(
@@ -480,11 +488,34 @@ function drawBackHair(
   }
 }
 
+/** Bridges the head to the shoulders so the body reads as one figure. */
+function neck(
+  canvas: PixelCanvas,
+  headBottom: number,
+  torsoY: number,
+  x0 = 6,
+  x1 = 9,
+): void {
+  for (let y = headBottom + 1; y < torsoY; y += 1) {
+    canvas.hline(x0, x1, y);
+  }
+}
+
+function sideburns(canvas: PixelCanvas, faceY: number, wide: boolean): void {
+  const left = wide ? 3 : 4;
+  const right = wide ? 12 : 11;
+  canvas.vline(left, faceY, faceY + 4);
+  canvas.vline(right, faceY, faceY + 4);
+}
+
 export function drawVillagerDown(look: VillagerLook): string[] {
   const canvas = new PixelCanvas(16, 32);
   const child = look.scale === "child";
   const faceY = hat(canvas, look.hat, child);
   face(canvas, faceY, look.body === "coat");
+  if (look.hat !== "hood" && look.hat !== "souwester") {
+    sideburns(canvas, faceY, look.body === "coat");
+  }
   if (look.glasses) {
     canvas.rect(5, faceY + 2, 3, 2);
     canvas.rect(8, faceY + 2, 3, 2);
@@ -496,6 +527,7 @@ export function drawVillagerDown(look: VillagerLook): string[] {
     canvas.rect(6, faceY + 5, 4, 4);
   }
   const torsoY = child ? 17 : look.beard === "long" ? 15 : 14;
+  neck(canvas, faceY + (look.beard === "long" ? 8 : 6), torsoY);
   torso(canvas, torsoY, look.body);
   accessoryDown(canvas, look.accessory, torsoY);
   legs(
@@ -525,6 +557,7 @@ export function drawVillagerRight(look: VillagerLook): string[] {
   }
 
   const torsoY = child ? 17 : look.beard === "long" ? 15 : 14;
+  neck(canvas, faceY + (look.beard === "long" ? 8 : 6), torsoY, 8, 11);
   const wide =
     look.body === "coat" || look.body === "robe" || look.body === "dress";
   canvas.rect(wide ? 6 : 7, torsoY, wide ? 7 : 6, 8);
@@ -558,6 +591,7 @@ export function drawVillagerUp(look: VillagerLook): string[] {
   canvas.rect(5, top, 6, 6);
   drawBackHair(canvas, look.hat, top);
   const torsoY = child ? 17 : look.beard === "long" ? 15 : 14;
+  neck(canvas, top + 5, torsoY);
   torso(canvas, torsoY, look.body);
   accessoryUp(canvas, look.accessory, torsoY);
   legs(
