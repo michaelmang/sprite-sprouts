@@ -69,8 +69,14 @@ export function BeatSprite({
   if (beat === "heart") {
     return (
       <svg {...common} aria-label="Heart beat">
-        <path fill="#27192c" d="M10 8h8v4h4V8h8v4h4v11h-4v4h-4v4h-4v4h-4v-4h-4v-4h-4v-4H6V12h4z" />
-        <path fill="#e15689" d="M11 11h6v4h6v-4h6v3h3v8h-4v4h-4v4h-8v-4h-4v-4H9v-8h2z" />
+        <path
+          fill="#27192c"
+          d="M10 8h8v4h4V8h8v4h4v11h-4v4h-4v4h-4v4h-4v-4h-4v-4h-4v-4H6V12h4z"
+        />
+        <path
+          fill="#e15689"
+          d="M11 11h6v4h6v-4h6v3h3v8h-4v4h-4v4h-8v-4h-4v-4H9v-8h2z"
+        />
         <path fill="#ff9fba" d="M12 12h5v4h-5zm3 5h12v4H15z" />
         <path fill="#94ec77" d="M17 5h3v6h-3zm4 1h5v3h-5z" />
         <path fill="#79ddf2" d="M2 18h6v3H2zm30 0h6v3h-6z" />
@@ -96,12 +102,21 @@ export function BeatSprite({
   if (beat === "orb") {
     return (
       <svg {...common} aria-label="Water orb beat">
-        <path fill="#17213a" d="M13 9h14v4h5v5h3v10h-4v5h-5v3H14v-3H9v-5H5V18h3v-5h5z" />
-        <path fill="#286b8d" d="M13 12h14v3h4v5h2v7h-4v4h-4v3H15v-3h-4v-4H7v-7h3v-5h3z" />
+        <path
+          fill="#17213a"
+          d="M13 9h14v4h5v5h3v10h-4v5h-5v3H14v-3H9v-5H5V18h3v-5h5z"
+        />
+        <path
+          fill="#286b8d"
+          d="M13 12h14v3h4v5h2v7h-4v4h-4v3H15v-3h-4v-4H7v-7h3v-5h3z"
+        />
         <path fill="#45a9b5" d="M14 14h9v3h4v4h3v7h-4v3H15v-3h-4v-9h3z" />
         <path fill="#8cded0" d="M14 15h7v3h-7z" />
         <path fill="#16243c" d="M14 22h3v3h-3zm10 0h3v3h-3zm-6 5h5v2h-5z" />
-        <path fill="#4b9ea4" d="M3 10h5v3H3zm29 1h5v3h-5zM4 31h5v3H4zm28-1h5v3h-5z" />
+        <path
+          fill="#4b9ea4"
+          d="M3 10h5v3H3zm29 1h5v3h-5zM4 31h5v3H4zm28-1h5v3h-5z"
+        />
       </svg>
     );
   }
@@ -109,7 +124,10 @@ export function BeatSprite({
   return (
     <svg {...common} aria-label="Shell beat">
       <path fill="#251a31" d="M8 28h4V15h4V9h8v3h5v4h4v8h-4v5h-5v4H12v-2H8z" />
-      <path fill="#bc5e65" d="M11 27h3V16h4v-5h5v3h5v4h3v5h-4v4h-4v4h-9v-2h-3z" />
+      <path
+        fill="#bc5e65"
+        d="M11 27h3V16h4v-5h5v3h5v4h3v5h-4v4h-4v4h-9v-2h-3z"
+      />
       <path fill="#ef9a6b" d="M14 25h3V16h4v-3h2v4h4v3h2v3h-4v3h-4v3h-7z" />
       <path fill="#f3cb6a" d="M17 23h3v-7h3v4h3v3h-3v3h-6z" />
       <path fill="#8cd15d" d="M7 9h4v6H7zm23 20h6v3h-6z" />
