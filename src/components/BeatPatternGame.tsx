@@ -39,7 +39,9 @@ export function BeatPatternGame() {
   const [playerInput, setPlayerInput] = useState<BeatKind[]>([]);
   const [activeBeat, setActiveBeat] = useState<BeatKind | null>(null);
   const [activeStep, setActiveStep] = useState<number | null>(null);
-  const [message, setMessage] = useState("Meet Pip and learn your first rhythm.");
+  const [message, setMessage] = useState(
+    "Meet Pip and learn your first rhythm.",
+  );
   const [muted, setMuted] = useState(false);
   const audioContext = useRef<AudioContext | null>(null);
   const timers = useRef<number[]>([]);
@@ -90,15 +92,21 @@ export function BeatPatternGame() {
 
     const pattern = patterns[round] ?? patterns[0];
     pattern?.forEach((beat, index) => {
-      const onTimer = window.setTimeout(() => {
-        setActiveBeat(beat);
-        setActiveStep(index);
-        playTone(beat, 0.22);
-      }, 450 + index * 650);
-      const offTimer = window.setTimeout(() => {
-        setActiveBeat(null);
-        setActiveStep(null);
-      }, 790 + index * 650);
+      const onTimer = window.setTimeout(
+        () => {
+          setActiveBeat(beat);
+          setActiveStep(index);
+          playTone(beat, 0.22);
+        },
+        450 + index * 650,
+      );
+      const offTimer = window.setTimeout(
+        () => {
+          setActiveBeat(null);
+          setActiveStep(null);
+        },
+        790 + index * 650,
+      );
       timers.current.push(onTimer, offTimer);
     });
 
@@ -213,7 +221,9 @@ export function BeatPatternGame() {
         <div className="round-track" aria-label={`Lesson ${round + 1} of 4`}>
           {patterns.map((_, index) => (
             <span
-              className={index <= round ? "round-dot round-dot-active" : "round-dot"}
+              className={
+                index <= round ? "round-dot round-dot-active" : "round-dot"
+              }
               key={index}
             />
           ))}
@@ -247,7 +257,11 @@ export function BeatPatternGame() {
                   : playerInput[index];
               return (
                 <span
-                  className={filledBeat ? "pattern-slot pattern-slot-filled" : "pattern-slot"}
+                  className={
+                    filledBeat
+                      ? "pattern-slot pattern-slot-filled"
+                      : "pattern-slot"
+                  }
                   key={`${round}-${index}`}
                 >
                   {filledBeat ? (
@@ -286,17 +300,29 @@ export function BeatPatternGame() {
 
           <div className="game-actions">
             {(phase === "welcome" || phase === "input") && (
-              <button className="primary-action" type="button" onClick={showPattern}>
+              <button
+                className="primary-action"
+                type="button"
+                onClick={showPattern}
+              >
                 {phase === "welcome" ? "Hear the pattern" : "Hear it again"}
               </button>
             )}
             {phase === "success" && (
-              <button className="primary-action" type="button" onClick={nextRound}>
+              <button
+                className="primary-action"
+                type="button"
+                onClick={nextRound}
+              >
                 Try the next pattern
               </button>
             )}
             {phase === "complete" && (
-              <button className="primary-action" type="button" onClick={restart}>
+              <button
+                className="primary-action"
+                type="button"
+                onClick={restart}
+              >
                 Play from the beginning
               </button>
             )}
