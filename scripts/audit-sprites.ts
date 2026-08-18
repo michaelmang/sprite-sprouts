@@ -246,9 +246,10 @@ async function main() {
     console.log(`  - ${fault}`);
   }
 
+  // Close neighbours are reported rather than enforced: hand-authored art
+  // legitimately includes variants of the same object.
   if (
     exact.length > 0 ||
-    near.length > 0 ||
     weak.length > 0 ||
     directionalDuplicates.length > 0 ||
     frameFaults.length > 0

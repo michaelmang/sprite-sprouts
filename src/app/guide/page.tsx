@@ -12,33 +12,42 @@ export default function GuidePage() {
           Pull &amp; upload
         </h1>
         <p className="text-soil mt-3 leading-7">
-          The git repo is the handoff. AI writes painted drafts into{" "}
+          The git repo is the handoff. Sprites are authored in PixelLab and
+          committed into{" "}
           <code className="bg-paper rounded px-1.5 py-0.5 font-mono text-sm">
             sprites/
           </code>
-          , you pull them onto your desktop, then commit the finished files back
-          to the same paths.
+          , so the art, the design docs, and the game all move together.
         </p>
       </div>
       <ol className="flex list-decimal flex-col gap-5 pl-6 leading-7">
         <li>
-          Clone or pull this repository. Each sprite is a folder such as{" "}
+          Author the sprite in PixelLab, following the sizes and palette in{" "}
+          <span className="font-mono text-sm">sprites/README.md</span>. Generate
+          the shared style reference first so every asset matches.
+        </li>
+        <li>
+          Add it under{" "}
           <code className="bg-paper rounded px-1.5 py-0.5 font-mono text-sm">
-            sprites/characters/willow-farmer/
-          </code>
-          .
+            sprites/characters/&lt;id&gt;/
+          </code>{" "}
+          or{" "}
+          <code className="bg-paper rounded px-1.5 py-0.5 font-mono text-sm">
+            sprites/objects/&lt;id&gt;/
+          </code>{" "}
+          with a <span className="font-mono text-sm">sprite.json</span> carrying
+          its metadata, palette, and animations.
         </li>
         <li>
-          Open <span className="font-mono text-sm">sprite.json</span> in your
-          custom software. The pixel grids, palette, animations, and pivot live
-          there. <span className="font-mono text-sm">preview.svg</span> is the
-          same idle pose as a picture.
-        </li>
-        <li>
-          Refine the art. Each sprite arrives with its own palette of outline,
-          shadow, body, and highlight colours; adjust those entries or repaint
-          individual cells. Keep the outline a warm dark tone and light the
-          shape from the top left.
+          Run{" "}
+          <code className="bg-paper rounded px-1.5 py-0.5 font-mono text-sm">
+            yarn sprites:validate
+          </code>{" "}
+          and{" "}
+          <code className="bg-paper rounded px-1.5 py-0.5 font-mono text-sm">
+            yarn sprites:audit
+          </code>{" "}
+          to check the schema and catch duplicate or under-filled art.
         </li>
         <li>
           Set <span className="font-mono text-sm">status</span> to{" "}
@@ -50,10 +59,8 @@ export default function GuidePage() {
         </li>
       </ol>
       <p className="text-soil text-sm">
-        New blank sprites:{" "}
-        <code className="bg-paper rounded px-1.5 py-0.5 font-mono">
-          yarn sprites:new character my-npc
-        </code>
+        The full production queue is in{" "}
+        <span className="font-mono">docs/asset-plan.md</span>.
       </p>
     </main>
   );

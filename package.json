@@ -2,7 +2,7 @@
   "name": "sprite-sprouts",
   "version": "0.1.0",
   "private": true,
-  "description": "Catalog of AI-generated sprite outlines and finalized pixel art for a Stardew Valley-like game.",
+  "description": "Asset catalog and design docs for a music-composition learning game.",
   "packageManager": "yarn@4.10.3",
   "scripts": {
     "dev": "next dev",
@@ -14,9 +14,7 @@
     "typecheck": "tsc --noEmit",
     "sprites:validate": "tsx scripts/validate-sprites.ts",
     "sprites:audit": "tsx scripts/audit-sprites.ts",
-    "sprites:new": "tsx scripts/new-sprite.ts",
-    "sprites:render": "tsx scripts/render-sprites.ts",
-    "sprites:catalog": "tsx scripts/generate-catalog.ts"
+    "sprites:render": "tsx scripts/render-sprites.ts"
   },
   "dependencies": {
     "next": "16.3.1",

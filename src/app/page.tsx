@@ -16,17 +16,19 @@ export default async function Home() {
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-12 px-6 py-12">
       <section className="max-w-2xl">
         <p className="text-moss text-sm font-medium">
-          Stardew-like sprite catalog
+          Sprite catalog for the music-composition game
         </p>
         <h1 className="mt-2 text-4xl font-semibold tracking-tight">
-          Painted drafts in, finished sprites back.
+          Every asset, in one place.
         </h1>
         <p className="text-soil mt-4 text-lg leading-8">
-          {characterCount} character and {objectCount} object sprites covering a
-          full valley: townsfolk, farm animals, tools, crops, forage, mines,
-          fish, artisan goods, machines, and furniture. Every sprite ships
-          painted with an outline, body, and shading, so you can pull a folder
-          into your desktop software, refine it, and upload it back.
+          {characterCount} characters and {objectCount} objects. Sprites are
+          authored in PixelLab and committed here, so the game, the design docs,
+          and the art all move together. See{" "}
+          <code className="bg-paper rounded px-1.5 py-0.5 font-mono text-base">
+            docs/
+          </code>{" "}
+          for the design, asset, audio, and build plans.
         </p>
       </section>
 
@@ -76,11 +78,11 @@ function KindSections({
 function EmptyKind({ kind }: { kind: "character" | "object" }) {
   return (
     <p className="border-soil/25 bg-paper text-soil rounded-xl border border-dashed px-4 py-6 text-sm">
-      No {kind}s yet. Add one with{" "}
+      No {kind}s yet. Drop a folder into{" "}
       <code className="bg-background text-foreground rounded px-1.5 py-0.5 font-mono">
-        yarn sprites:new {kind} my-{kind}
-      </code>
-      .
+        sprites/{kind === "character" ? "characters" : "objects"}/
+      </code>{" "}
+      or import from PixelLab.
     </p>
   );
 }
