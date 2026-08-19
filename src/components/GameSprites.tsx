@@ -119,9 +119,11 @@ function AnimatedHeart({ alt, className }: SpriteProps & { alt: string }) {
   const [frame, setFrame] = useState(0);
 
   useEffect(() => {
-    const timers = heartAnimation.slice(1).map((_, index) =>
-      window.setTimeout(() => setFrame(index + 1), (index + 1) * 55),
-    );
+    const timers = heartAnimation
+      .slice(1)
+      .map((_, index) =>
+        window.setTimeout(() => setFrame(index + 1), (index + 1) * 55),
+      );
     return () => timers.forEach((timer) => window.clearTimeout(timer));
   }, []);
 
