@@ -13,15 +13,13 @@ type SpriteProps = {
   className?: string;
 };
 
-const beatSprites: Record<
-  BeatKind,
-  { image: StaticImageData; label: string }
-> = {
-  heart: { image: heartSprite, label: "Heart beat" },
-  seed: { image: seedSprite, label: "Sprout beat" },
-  orb: { image: orbSprite, label: "Water orb beat" },
-  shell: { image: shellSprite, label: "Shell beat" },
-};
+const beatSprites: Record<BeatKind, { image: StaticImageData; label: string }> =
+  {
+    heart: { image: heartSprite, label: "Heart beat" },
+    seed: { image: seedSprite, label: "Sprout beat" },
+    orb: { image: orbSprite, label: "Water orb beat" },
+    shell: { image: shellSprite, label: "Shell beat" },
+  };
 
 function PixelSprite({
   alt,

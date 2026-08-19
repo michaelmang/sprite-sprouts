@@ -10,14 +10,14 @@ spirits are the `a_cute_colorful_root_vegetabl*.png` set.
 
 The beat-game MVP currently imports these files directly:
 
-| Game role  | PixelLab export                                                   |
-| ---------- | ----------------------------------------------------------------- |
-| Apprentice | `cute_medieval_boy__south.png`                                    |
-| Guide      | `wise_bird_sage_wizard_philosopher_with__south.png`               |
-| Heart      | `a_cute_colorful_root_vegetabl_6.png`                              |
-| Sprout     | `a_cute_colorful_root_vegetabl_8.png`                              |
-| Water      | `a_cute_colorful_root_vegetabl_5.png`                              |
-| Shell      | `a_cute_colorful_root_vegetabl_13.png`                             |
+| Game role  | PixelLab export                                     |
+| ---------- | --------------------------------------------------- |
+| Apprentice | `cute_medieval_boy__south.png`                      |
+| Guide      | `wise_bird_sage_wizard_philosopher_with__south.png` |
+| Heart      | `a_cute_colorful_root_vegetabl_6.png`               |
+| Sprout     | `a_cute_colorful_root_vegetabl_8.png`               |
+| Water      | `a_cute_colorful_root_vegetabl_5.png`               |
+| Shell      | `a_cute_colorful_root_vegetabl_13.png`              |
 
 These are static imports in `src/components/GameSprites.tsx`; Next.js
 fingerprints them in the production build while preserving the original PNG
