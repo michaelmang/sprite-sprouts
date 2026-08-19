@@ -39,14 +39,17 @@ export function BeatPatternGame() {
   const [playerInput, setPlayerInput] = useState<BeatKind[]>([]);
   const [activeBeat, setActiveBeat] = useState<BeatKind | null>(null);
   const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [activationId, setActivationId] = useState(0);
   const [message, setMessage] = useState(
     "Meet Pip and learn your first rhythm.",
   );
   const [muted, setMuted] = useState(false);
   const audioContext = useRef<AudioContext | null>(null);
+  const activationVersion = useRef(0);
   const timers = useRef<number[]>([]);
 
   const clearTimers = useCallback(() => {
+    activationVersion.current += 1;
     timers.current.forEach((timer) => window.clearTimeout(timer));
     timers.current = [];
   }, []);
@@ -84,6 +87,27 @@ export function BeatPatternGame() {
     [muted],
   );
 
+  const activateBeat = useCallback(
+    (beat: BeatKind, duration: number, clearStep = false) => {
+      const version = activationVersion.current + 1;
+      activationVersion.current = version;
+      setActiveBeat(beat);
+      setActivationId(version);
+
+      const timer = window.setTimeout(() => {
+        if (activationVersion.current !== version) {
+          return;
+        }
+        setActiveBeat(null);
+        if (clearStep) {
+          setActiveStep(null);
+        }
+      }, duration);
+      timers.current.push(timer);
+    },
+    [],
+  );
+
   const showPattern = useCallback(() => {
     clearTimers();
     setPlayerInput([]);
@@ -94,20 +118,13 @@ export function BeatPatternGame() {
     pattern?.forEach((beat, index) => {
       const onTimer = window.setTimeout(
         () => {
-          setActiveBeat(beat);
           setActiveStep(index);
+          activateBeat(beat, 500, true);
           playTone(beat, 0.22);
         },
         450 + index * 650,
       );
-      const offTimer = window.setTimeout(
-        () => {
-          setActiveBeat(null);
-          setActiveStep(null);
-        },
-        790 + index * 650,
-      );
-      timers.current.push(onTimer, offTimer);
+      timers.current.push(onTimer);
     });
 
     const inputTimer = window.setTimeout(
@@ -120,7 +137,7 @@ export function BeatPatternGame() {
       650 + pattern.length * 650,
     );
     timers.current.push(inputTimer);
-  }, [clearTimers, playTone, round]);
+  }, [activateBeat, clearTimers, playTone, round]);
 
   const chooseBeat = useCallback(
     (beat: BeatKind) => {
@@ -131,9 +148,7 @@ export function BeatPatternGame() {
       const pattern = patterns[round] ?? patterns[0];
       const expected = pattern?.[playerInput.length];
       playTone(beat);
-      setActiveBeat(beat);
-      const offTimer = window.setTimeout(() => setActiveBeat(null), 180);
-      timers.current.push(offTimer);
+      activateBeat(beat, 500);
 
       if (beat !== expected) {
         setPlayerInput([]);
@@ -161,7 +176,7 @@ export function BeatPatternGame() {
         timers.current.push(successTimer);
       }
     },
-    [phase, playTone, playerInput, round],
+    [activateBeat, phase, playTone, playerInput, round],
   );
 
   useEffect(() => {
@@ -183,6 +198,8 @@ export function BeatPatternGame() {
     clearTimers();
     setRound((current) => current + 1);
     setPlayerInput([]);
+    setActiveBeat(null);
+    setActiveStep(null);
     setPhase("welcome");
     setMessage("A new pattern stirs in the grove.");
   };
@@ -265,7 +282,12 @@ export function BeatPatternGame() {
                   key={`${round}-${index}`}
                 >
                   {filledBeat ? (
-                    <BeatSprite beat={filledBeat} className="slot-sprite" />
+                    <BeatSprite
+                      active={phase === "demo" && activeStep === index}
+                      activationId={activationId}
+                      beat={filledBeat}
+                      className="slot-sprite"
+                    />
                   ) : (
                     <span>{index + 1}</span>
                   )}
@@ -291,7 +313,12 @@ export function BeatPatternGame() {
                 type="button"
                 onClick={() => chooseBeat(beat.id)}
               >
-                <BeatSprite beat={beat.id} className="beat-sprite" />
+                <BeatSprite
+                  active={activeBeat === beat.id}
+                  activationId={activationId}
+                  beat={beat.id}
+                  className="beat-sprite"
+                />
                 <span className="beat-name">{beat.name}</span>
                 <kbd>{index + 1}</kbd>
               </button>
