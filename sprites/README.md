@@ -23,9 +23,11 @@ These are static imports in `src/components/GameSprites.tsx`; Next.js
 fingerprints them in the production build while preserving the original PNG
 bytes. CSS enlarges them with nearest-neighbour pixel rendering.
 
-`objects/beat-1/animations/frame_000.png` through `frame_008.png` form the
-Heart beat's one-shot activation animation. It plays during the guide's
-demonstration and restarts on every correct or incorrect Heart input.
+`beat-1/animations/frame_000.png` through `frame_008.png` form the Heart beat's
+one-shot activation animation. It lives outside `objects/` because it is a
+PNG source bundle rather than a legacy `sprite.json` catalog entry. The
+animation plays during the guide's demonstration and restarts on every correct
+or incorrect Heart input.
 
 ```text
 sprites/
